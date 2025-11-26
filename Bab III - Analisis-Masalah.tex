@@ -1,24 +1,143 @@
-% ============================================================================================
-% BAB III ANALISIS MASALAH
-% Pembagian subbab tidak rigid dan dapat bervariasi. Bab ini minimal berisi analisis kebutuhan
-% fungsional dan nonfungsional, analisis berbagai alternatif solusi yang dapat ditawarkan, dan
-% metode pemilihan solusi yang diusulkan.
-% ============================================================================================
 \chapter{ANALISIS MASALAH}
 \label{chap:analisis-masalah}
+
 \section{Analisis Kondisi Saat Ini}
-Menurut \textcite{laudon2020}, gambarkan terlebih dahulu model konseptual sistem yang ada saat ini. Model konseptual ini berisi berbagai komponen atau subsitem dan interaksi antarsubsistem tersebut. Setelah itu, berikan penjelasan tentang masalah yang ada pada sistem tersebut. Paragraf berikut berisi contoh penjabaran masalah sistem informasi fasilitas kesehatan untuk pasien \autocite{pressman2019}. 
+
+Sistem pemantauan kualitas udara Jakarta saat ini dikelola oleh Dinas Lingkungan Hidup DKI Jakarta melalui lima stasiun pemantauan (DKI1--DKI5) yang mengukur konsentrasi polutan secara harian. Data yang dikumpulkan meliputi PM\textsubscript{10}, SO\textsubscript{2}, CO, O\textsubscript{3}, dan NO\textsubscript{2} yang kemudian dihitung menjadi nilai Indeks Standar Pencemar Udara (ISPU). Model konseptual sistem pemantauan kualitas udara Jakarta saat ini ditunjukkan pada Gambar \ref{gambar:kondisi}.
+
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+      \includegraphics[width=0.6\textwidth]{image/gambar3.png}
+  \caption{Model konseptual sistem pemantauan kualitas udara Jakarta saat ini}
+  \label{gambar:kondisi}
+\end{figure}
+
+Berdasarkan Gambar \ref{gambar:kondisi}, sistem saat ini memiliki alur sebagai berikut: data ISPU Jakarta yang mencakup PM\textsubscript{10} dan polutan lain dari periode 2010--2025 dikumpulkan dari lima stasiun pemantauan, kemudian dilakukan monitoring harian dan pelaporan ke masyarakat melalui website dan aplikasi KLHK, dan menghasilkan status kualitas udara harian dengan model prediksi sederhana.
+
+Meskipun sudah terdapat beberapa penelitian prediksi kualitas udara Jakarta, sistem yang ada masih memiliki keterbatasan. Pertama, akurasi prediksi belum optimal karena penelitian sebelumnya seperti \textcite{alarsy2025pm25} hanya mencapai R² = 0,61 untuk prediksi PM\textsubscript{2,5} Jakarta menggunakan \textit{Random Forest} tunggal. Kedua, tidak ada \textit{feature engineering} sistematis karena model yang ada hanya menggunakan fitur polutan mentah tanpa mengeksplorasi pola temporal, statistik, dan interaksi antar polutan \cite{yenkikar2025explainable}. Ketiga, tidak ada \textit{explainability} untuk kebijakan karena model prediksi yang ada belum mengintegrasikan analisis SHAP untuk mengidentifikasi faktor-faktor kunci yang mendorong polusi dan mendukung pengambilan keputusan berbasis bukti.
+
 \section{Analisis Kebutuhan}
-\lipsum[4]
+
 \subsection{Identifikasi Masalah Pengguna}
-\lipsum[5]
+
+Pengguna utama sistem prediksi PM\textsubscript{10} Jakarta adalah Dinas Lingkungan Hidup DKI Jakarta dan Dinas Kesehatan DKI Jakarta. Berdasarkan analisis kondisi saat ini, teridentifikasi beberapa masalah yang dihadapi pengguna.
+
+Pertama, Dinas Lingkungan Hidup membutuhkan prediksi PM\textsubscript{10} yang lebih akurat untuk sistem peringatan dini (\textit{early warning system}) kepada masyarakat. Prediksi yang akurat memungkinkan pemberian peringatan sebelum tingkat polusi mencapai kategori tidak sehat, memberikan waktu bagi masyarakat untuk mengambil tindakan pencegahan.
+
+Kedua, Dinas Kesehatan membutuhkan informasi tentang faktor-faktor utama yang mendorong polusi PM\textsubscript{10} untuk merumuskan kebijakan kesehatan yang tepat sasaran. Tanpa \textit{explainability}, sulit untuk mengidentifikasi sumber polusi yang paling berpengaruh dan merancang intervensi yang efektif.
+
+Ketiga, kedua dinas membutuhkan model yang dapat memanfaatkan data historis jangka panjang (15 tahun) untuk menangkap pola musiman dan tren polusi Jakarta yang khas, termasuk perbedaan antara musim hujan dan kemarau.
+
 \subsection{Kebutuhan Fungsional}
-\lipsum[6]
+
+Berdasarkan identifikasi masalah pengguna, kebutuhan fungsional sistem prediksi PM\textsubscript{10} Jakarta ditunjukkan pada Tabel \ref{tbl:fungsional}.
+
+\begin{table}[h]
+  \begin{tabular}{ | c | p{10cm} |}
+  \hline
+  \textbf{Kode} & \textbf{Deskripsi Kebutuhan} \\
+  \hline
+  F1 & Sistem harus dapat memprediksi nilai PM\textsubscript{10} harian untuk DKI Jakarta \\
+  \hline
+  F2 & Sistem harus menggunakan model \textit{hybrid} Random Forest-ARIMA \\
+  \hline
+  F3 & Sistem harus memanfaatkan minimal 15 fitur (5 baseline + 10 \textit{feature engineering}) \\
+  \hline
+  F4 & Sistem harus dapat menghasilkan metrik performa (RMSE, MAE, R²) pada data uji \\
+  \hline
+  F5 & Sistem harus memberikan keluaran kontribusi fitur menggunakan SHAP \\
+  \hline
+  F6 & Sistem harus mampu memproses data historis rentang 2010--2025 \\
+  \hline
+  \end{tabular}
+\caption{Kebutuhan fungsional sistem prediksi PM\textsubscript{10}}
+\label{tbl:fungsional}
+\end{table}
+
 \subsection{Kebutuhan Nonfungsional}
-\lipsum[7]
+
+Selain kebutuhan fungsional, sistem juga harus memenuhi kebutuhan nonfungsional seperti ditunjukkan pada Tabel \ref{tbl:nonfungsional}.
+
+\begin{table}[h]
+  \begin{tabular}{ | c | p{10cm} |}
+  \hline
+  \textbf{Kode} & \textbf{Deskripsi Kebutuhan} \\
+  \hline
+  NF1 & Akurasi: RMSE model harus minimal 15\% lebih rendah dibandingkan baseline \\
+  \hline
+  NF2 & \textit{Robustness}: Model tidak boleh \textit{overfitting} (divalidasi dengan \textit{train-test split} 80:20) \\
+  \hline
+  NF3 & Interpretabilitas: Model harus dapat dijelaskan menggunakan SHAP (\textit{global} dan \textit{local}) \\
+  \hline
+  NF4 & \textit{Reproducibility}: Eksperimen harus dapat direplikasi dengan skrip Python yang terdokumentasi \\
+  \hline
+  \end{tabular}
+\caption{Kebutuhan nonfungsional sistem prediksi PM\textsubscript{10}}
+\label{tbl:nonfungsional}
+\end{table}
 
 \section{Analisis Pemilihan Solusi}
+
 \subsection{Alternatif Solusi}
-\lipsum[8]
+
+Dalam proposal tugas akhir ini, disusun tiga alternatif model yang dapat menjadi pilihan untuk mengembangkan model prediksi PM\textsubscript{10} Jakarta. Alternatif model prediktif pertama merupakan model analisis statistik untuk data deret waktu, yaitu ARIMA. Alternatif model prediktif kedua merupakan model pembelajaran mesin berbasis pohon (\textit{tree-based model}), yaitu \textit{Random Forest}. Alternatif model prediktif ketiga adalah model \textit{hybrid} yang menggabungkan \textit{Random Forest} dan ARIMA dengan \textit{feature engineering}.
+
+Model analisis statistik untuk data deret waktu dapat menjadi alternatif yang relevan dan efektif, terutama pada data yang memiliki pola musiman yang konsisten. Dengan memanfaatkan tren dan pola musiman dalam data, model ini mampu memberikan proyeksi yang akurat dan dapat dijelaskan secara transparan \cite{yunis2024hybridization}. Transparansi ini menjadi keunggulan tersendiri dibandingkan dengan beberapa model \textit{machine learning} yang bersifat \textit{black-box}. Dalam kasus prediksi PM\textsubscript{10} Jakarta, data ISPU menunjukkan pola musiman yang jelas antara musim hujan dan kemarau sehingga model statistik berpotensi memberikan hasil prediksi yang akurat.
+
+Model pembelajaran mesin berbasis pohon juga terbukti dapat menjadi pilihan solusi yang sangat andal untuk melakukan prediksi, termasuk memprediksi data deret waktu. Dalam konteks prediksi PM\textsubscript{10} Jakarta, model berbasis pohon berpotensi menghasilkan prediksi yang lebih akurat karena terdapat beberapa variabel polutan lain yang mungkin mempengaruhi konsentrasi PM\textsubscript{10}. Dengan memanfaatkan model berbasis pohon, hubungan non-linier antar variabel dapat ditangkap dengan baik sehingga model dapat melakukan analisis yang lebih menyeluruh \cite{abdallah2025predicting}.
+
+Sebagai pilihan yang menggabungkan kedua pendekatan, model \textit{hybrid} Random Forest-ARIMA dengan \textit{feature engineering} dapat menjadi alternatif solusi yang optimal. \textcite{yenkikar2025explainable} menunjukkan bahwa model \textit{hybrid} RF-ARIMA mencapai R² = 0,94 untuk prediksi AQI. Namun, penelitian tersebut hanya menggunakan 6 fitur polutan mentah. \textcite{naz2024two} menunjukkan bahwa \textit{feature engineering} dapat meningkatkan performa model hingga 86\%. Dengan demikian, kombinasi \textit{hybrid} RF-ARIMA dengan \textit{feature engineering} berpotensi menghasilkan akurasi yang lebih tinggi.
+
 \subsection{Analisis Penentuan Solusi}
-\lipsum[9]
+
+Dalam proses penentuan alternatif solusi yang telah dirumuskan, terdapat lima kriteria yang menjadi bahan pertimbangan melalui metode \textit{Analytical Hierarchy Process} (AHP) pada Tabel \ref{tbl:ahp}, dengan rentang nilai 1--5 (Sangat Buruk -- Sangat Baik).
+
+\begin{enumerate}
+
+\item Interpretabilitas: Hasil prediksi harus berdasar dan dapat dijelaskan dengan baik untuk mendukung kebijakan.
+
+\item Akurasi: Kesalahan hasil prediksi minimal, diukur dengan RMSE dan R².
+
+\item Kemampuan menangkap pola data kompleks: Model harus mampu menangkap hubungan non-linier dan pola temporal.
+
+\item Sumber daya komputasi: Kebutuhan komputasi yang efisien.
+
+\item Kemudahan implementasi: Model dapat diimplementasikan dengan \textit{library} Python yang tersedia.
+
+\end{enumerate}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{ | p{4.5cm} | c | c | c |}
+  \hline
+  \textbf{Kriteria (Bobot)} & \textbf{ARIMA} & \textbf{RF} & \textbf{\textit{Hybrid} + FE} \\
+  \hline
+  Interpretabilitas (0,35) & 5 & 4 & 4 \\
+  \hline
+  Akurasi (0,30) & 3 & 4 & 5 \\
+  \hline
+  Pola kompleks (0,15) & 3 & 4 & 5 \\
+  \hline
+  Komputasi (0,10) & 5 & 4 & 3 \\
+  \hline
+  Implementasi (0,10) & 5 & 5 & 4 \\
+  \hline
+  \textbf{Total} & \textbf{3,95} & \textbf{4,10} & \textbf{4,40} \\
+  \hline
+  \end{tabular}
+\caption{AHP pemilihan alternatif solusi}
+\label{tbl:ahp}
+\end{table}
+
+Kriteria interpretabilitas menjadi kriteria yang paling diutamakan dalam memprediksi PM\textsubscript{10} Jakarta. Interpretabilitas informasi yang mempengaruhi hasil prediksi dianggap lebih penting bagi pembuat kebijakan untuk membuat keputusan. Oleh karena itu, model ARIMA mendapatkan nilai 5 karena model statistik deret waktu tersebut biasanya memiliki transparansi yang tinggi. Model \textit{Random Forest} dan \textit{hybrid} mendapatkan nilai 4 karena model-model tersebut dapat diintegrasikan dengan SHAP untuk meningkatkan transparansi \cite{radjabaycolle2025improving}.
+
+Akurasi menjadi faktor yang tidak terpisahkan dalam hal memprediksi. Model \textit{hybrid} dengan \textit{feature engineering} mendapatkan nilai 5 karena \textcite{yenkikar2025explainable} menunjukkan R² = 0,94 untuk model \textit{hybrid}, dan \textcite{naz2024two} menunjukkan \textit{feature engineering} dapat meningkatkan akurasi hingga 86\%. Model \textit{Random Forest} mendapatkan nilai 4 karena memiliki tingkat akurasi yang cukup tinggi \cite{abdallah2025predicting}. Di sisi lain, model ARIMA mendapatkan nilai 3 karena tingkat akurasinya cenderung lebih rendah dibandingkan model pembelajaran mesin.
+
+Dalam hal kemampuan menangkap pola data yang kompleks, model ARIMA memperoleh nilai 3 karena model ini cenderung kurang andal ketika harus menghadapi data yang dipengaruhi oleh banyak faktor eksternal. \textit{Random Forest} mendapatkan nilai 4 karena memiliki kemampuan yang lebih baik dalam memahami hubungan non-linier antar variabel serta menangani data dengan banyak fitur secara efisien. Model \textit{hybrid} dengan \textit{feature engineering} mendapatkan nilai 5 karena menggabungkan kelebihan kedua pendekatan dan diperkaya dengan fitur tambahan \cite{yenkikar2025explainable}.
+
+Dari sisi efisiensi sumber daya komputasi, model ARIMA menjadi yang paling ringan karena tidak memerlukan komputasi yang besar, berbeda dengan \textit{Random Forest} dan terutama model \textit{hybrid} yang membutuhkan lebih banyak daya komputasi. Selain itu, model ARIMA dan \textit{Random Forest} juga unggul dari segi kemudahan implementasi karena dapat langsung digunakan dengan memanfaatkan \textit{library} yang tersedia seperti \textit{statsmodels} dan \textit{scikit-learn}. Model \textit{hybrid} memperoleh nilai 4 karena membutuhkan usaha tambahan dalam menyusun arsitektur gabungan.
+
+Berdasarkan analisis AHP pada Tabel \ref{tbl:ahp}, alternatif model \textit{hybrid} Random Forest-ARIMA dengan \textit{feature engineering} memperoleh skor tertinggi sebesar 4,40 dan terpilih sebagai solusi terbaik. Pemilihan ini didasarkan pada beberapa alasan. Pertama, model \textit{hybrid} memiliki potensi akurasi tertinggi karena menggabungkan kelebihan \textit{Random Forest} dalam menangkap hubungan non-linier dengan ARIMA dalam menangkap pola temporal pada residual, dan diperkaya dengan \textit{feature engineering} untuk mengekstraksi informasi tambahan dari data \cite{yenkikar2025explainable}. Kedua, model \textit{hybrid} tetap memiliki interpretabilitas yang baik karena dapat diintegrasikan dengan SHAP untuk mengidentifikasi kontribusi setiap fitur terhadap prediksi \cite{radjabaycolle2025improving}. Ketiga, meskipun kompleksitas implementasi lebih tinggi, kompleksitas tersebut masih dapat dikelola dengan ketersediaan \textit{library} Python.
+
+Dengan demikian, penelitian ini akan mengembangkan model \textit{hybrid} Random Forest-ARIMA dengan \textit{feature engineering} untuk prediksi PM\textsubscript{10} Jakarta, dengan integrasi SHAP untuk \textit{explainability}.

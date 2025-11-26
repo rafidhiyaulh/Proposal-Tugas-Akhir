@@ -3,9 +3,227 @@
 % ==========================================
 \chapter{RENCANA SELANJUTNYA}
 \label{chap:rencana-selanjutnya}
-Jelaskan secara detail langkah-langkah rencana selanjutnya, hal-hal yang diperlukan atau akan disiapkan, dan risiko dan mitigasinya, yang meliputi:
+
+\section{Rencana Implementasi}
+
+\subsection{Langkah-langkah Implementasi}
+
+Implementasi penelitian prediksi PM\textsubscript{10} Jakarta dilakukan melalui enam tahap utama dengan timeline total 11 minggu. Tahapan-tahapan tersebut dirancang secara sekuensial untuk memastikan kualitas research yang optimal dan manageability dari segi waktu dan resources.
+
+\begin{table}[h]
+  \begin{tabular}{ | c | p{3cm} | p{6cm} | c |}
+  \hline
+  \textbf{No.} & \textbf{Tahap} & \textbf{Kegiatan} & \textbf{Durasi} \\
+  \hline
+  1 & Persiapan Data & Pengumpulan dataset ISPU Jakarta dari Kaggle dan KLHK, exploratory data analysis & 2 minggu \\
+  \hline
+  2 & Data Preprocessing & Penanganan missing values, agregasi multi-stasiun, persiapan data untuk feature engineering & 1 minggu \\
+  \hline
+  3 & Feature Engineering & Pembuatan 15 fitur (5 baseline + 10 engineered) meliputi lag, rolling statistics, temporal, dan interaksi & 1.5 minggu \\
+  \hline
+  4 & Pengembangan Model & Training dan hyperparameter tuning untuk Random Forest, ARIMA, dan model hybrid & 3 minggu \\
+  \hline
+  5 & Integrasi SHAP & Implementasi SHAP untuk global dan local explainability, visualisasi kontribusi fitur & 1.5 minggu \\
+  \hline
+  6 & Evaluasi \& Dokumentasi & Pengujian model, analisis hasil, penulisan laporan akhir & 2 minggu \\
+  \hline
+  & & \textbf{TOTAL} & \textbf{11 minggu} \\
+  \hline
+  \end{tabular}
+\caption{Timeline implementasi penelitian}
+\label{tbl:timeline}
+\end{table}
+
+Tahap-tahap ini disusun dengan mempertimbangkan ketergantungan antar tahap dan keseimbangan antara quality dan feasibility dalam konteks jadwal semester di ITB.
+
+\subsection{Alat yang Dibutuhkan}
+
+Penelitian ini menggunakan perangkat keras, perangkat lunak, dan libraries yang telah teruji untuk penelitian \textit{machine learning} dalam konteks time series forecasting. Berikut adalah daftar alat yang dibutuhkan:
+
+\begin{longtable}{@{\extracolsep{\fill}} c p{2.5cm} p{2.5cm} p{5cm}}
+\caption{Alat dan bahan penelitian}\label{tbl:alat} \\
+\toprule
+\textbf{No.} & \textbf{Kategori} & \textbf{Alat/Bahan} & \textbf{Keterangan} \\
+\midrule
+\endfirsthead
+
+\caption{Alat dan bahan penelitian (lanjutan)} \\
+\toprule
+\textbf{No.} & \textbf{Kategori} & \textbf{Alat/Bahan} & \textbf{Keterangan} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{4}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+1 & Perangkat Keras & MacBook Air M3 2024 & Laptop dengan spesifikasi: CPU Apple M3, RAM 16 GB, Storage 512 GB. Cukup untuk testing dan dokumentasi lokal. \\
+2 & Bahasa Pemrograman & Python 3.10+ & Bahasa pemrograman untuk implementasi model, dipilih karena ekosistem library \textit{machine learning} yang lengkap. \\
+3 & Perangkat Lunak - Data & pandas, NumPy & Library untuk manipulasi data dan komputasi numerik. Pandas untuk \textit{structured data handling}, NumPy untuk operasi array. \\
+4 & Perangkat Lunak - Visualisasi & Matplotlib, Seaborn & Library untuk visualisasi data dan hasil analisis. Matplotlib untuk \textit{basic plotting}, Seaborn untuk \textit{statistical visualizations}. \\
+5 & Perangkat Lunak - Time Series & statsmodels & Library untuk analisis deret waktu dan pemodelan ARIMA, menyediakan API lengkap dan \textit{diagnostic tools}. \\
+6 & Perangkat Lunak - ML & scikit-learn, XGBoost & scikit-learn untuk implementasi Random Forest. XGBoost digunakan sebagai alternatif baseline model. \\
+7 & Perangkat Lunak - XAI & SHAP & Library untuk interpretasi model menggunakan Shapley values, menyediakan \textit{global} dan \textit{local explainability}. \\
+8 & IDE & Jupyter Notebook & Lingkungan interaktif untuk pengembangan, pengujian, dan dokumentasi. Dijalankan via Google Colab Pro. \\
+9 & Version Control & Git, GitHub & Digunakan untuk \textit{version control} dan kolaborasi. Seluruh kode akan disimpan di repository GitHub. \\
+10 & Cloud Computing & Google Colab Pro & Lingkungan komputasi awan berbayar dengan GPU yang lebih cepat dan reliable, 100 unit komputasi per bulan. Digunakan untuk training model dengan estimasi waktu 20--30 menit per iterasi. \\
+11 & Dataset & ISPU Jakarta 2010--2025 & Dataset dari Kaggle (2010--2021) yang dilengkapi dengan data 2021--2025 dari KLHK API sehingga mencakup periode 2010--2025. \\
+\end{longtable}
+
+Pemilihan tools tersebut didasarkan pada beberapa pertimbangan utama:
+
 \begin{enumerate}
-\item	Rencana implementasi, termasuk alat dan bahan yang diperlukan, lingkungan, konfigurasi, biaya, dan sebagainya.
-\item	Desain pengujian dan evaluasi, misalnya metode verifikasi dan validasi.
-\item	Analisis risiko dan mitigasi, misalnya tindakan selanjutnya jika ada yang tidak berjalan sesuai rencana.
+
+\item Semua software adalah \textit{open-source} dan gratis, tidak ada biaya lisensi yang membebani penelitian (kecuali Google Colab Pro untuk training acceleration).
+
+\item Ekosistem yang mature dan well-documented, dengan komunitas pengguna yang besar sehingga memudahkan troubleshooting dan knowledge sharing.
+
+\item Support untuk Mac architecture (Apple Silicon M3), memastikan kompatibilitas dengan hardware yang digunakan tanpa perlu dual-boot atau virtual machine.
+
+\item Best practices dalam industri untuk research serupa, tools ini sudah digunakan di berbagai publikasi penelitian kualitas udara dan time series forecasting.
+
 \end{enumerate}
+
+Pemanfaatan Google Colab Pro memungkinkan training model dengan GPU yang reliable dan efficient, tanpa membebani resources MacBook. Internet yang digunakan sudah termasuk dalam biaya kosan dan akses ITB, sehingga tidak ada biaya tambahan untuk konektivitas. Dengan demikian, seluruh pipeline research dapat berjalan dengan performa optimal.
+
+\subsection{Analisis Biaya Implementasi}
+
+Biaya pengembangan model mencakup perangkat keras (MacBook Air M3 sudah dimiliki), perangkat lunak (semua \textit{open-source} gratis), dan Google Colab Pro untuk accelerated computing. Internet yang digunakan sudah termasuk dalam biaya kosan dan akses ITB, sehingga tidak ada biaya internet tambahan.
+
+Google Colab Pro dipilih untuk memastikan training model yang reliable dan efficient, dengan GPU yang lebih cepat, 100 unit komputasi per bulan, dan waktu idle timeout yang lebih panjang. Dengan resources ini, estimasi waktu training berkurang menjadi 20--30 menit per iterasi, memastikan timeline 11 minggu tetap feasible.
+
+Model dirancang sebagai \textit{open-source} dan dapat diimplementasikan secara gratis di server lokal Dinas Lingkungan Hidup DKI Jakarta, tanpa biaya lisensi atau \textit{subscription}. Dengan pendekatan ini, tidak ada barrier finansial untuk adopsi model oleh pemerintah, sejalan dengan tujuan social impact dari penelitian ini.
+
+\begin{longtable}{@{\extracolsep{\fill}} c p{3cm} p{2.5cm} p{2.5cm} p{4cm}}
+\caption{Estimasi biaya implementasi}\label{tbl:biaya} \\
+\toprule
+\textbf{No.} & \textbf{Kategori} & \textbf{Item} & \textbf{Biaya} & \textbf{Catatan} \\
+\midrule
+\endfirsthead
+
+\caption{Estimasi biaya implementasi (lanjutan)} \\
+\toprule
+\textbf{No.} & \textbf{Kategori} & \textbf{Item} & \textbf{Biaya} & \textbf{Catatan} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{5}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+1 & Pengembangan & Hardware (MacBook M3) & Rp 0 & Sudah dimiliki \\
+2 & Pengembangan & Software tools (Python, libraries) & Rp 0 & Open-source, gratis selamanya \\
+3 & Pengembangan & Google Colab Pro & Rp 170K/bulan & Reliable GPU, 100 unit komputasi, training lebih cepat \\
+4 & Pengembangan & Internet & Rp 0 & Sudah termasuk biaya kosan dan akses ITB \\
+5 & Implementasi & Biaya deployment pengguna & Rp 0 & Open-source, local installation \\
+& & \textbf{TOTAL} & \textbf{Rp 470K} & \textbf{Untuk 11 minggu development} \\
+\end{longtable}
+
+\section{Rencana Evaluasi}
+
+\subsection{Metode Pengujian}
+
+Model prediksi PM\textsubscript{10} akan diuji menggunakan metodologi yang rigorous untuk memastikan validitas hasil dan generalisasi ke data baru. Metodologi pengujian mencakup beberapa komponen utama.
+
+Pertama, \textbf{\textit{train-test split} 80:20 temporal}. Data dibagi menjadi 80\% untuk training (periode 2010--2023, ~4.430 hari) dan 20\% untuk testing (periode 2024--2025, ~1.108 hari). Pembagian dilakukan secara temporal (tidak random) untuk menghindari data leakage dan mencerminkan real-world scenario di mana model diprediksi untuk masa depan.
+
+Kedua, \textbf{perbandingan dengan baseline}. Model yang diusulkan (Hybrid RF-ARIMA + Feature Engineering) akan dibandingkan dengan tiga baseline:
+
+\begin{enumerate}
+
+\item Baseline 1: ARIMA tunggal (tanpa Random Forest)
+
+\item Baseline 2: Random Forest tunggal (tanpa ARIMA, dengan 5 fitur baseline saja)
+
+\item Baseline 3: Hybrid RF-ARIMA tanpa \textit{feature engineering}, sesuai \cite{yenkikar2025explainable}
+
+\end{enumerate}
+
+Ketiga, \textbf{metrik evaluasi}. Performa model dievaluasi menggunakan tiga metrik:
+
+\begin{enumerate}
+
+\item \textbf{RMSE} (\textit{Root Mean Square Error}): Mengukur magnitude dari error, sensitive terhadap outliers.
+
+\item \textbf{MAE} (\textit{Mean Absolute Error}): Mengukur average absolute error, lebih robust terhadap outliers.
+
+\item \textbf{R²} (\textit{Coefficient of Determination}): Mengukur proporsi varians yang dijelaskan oleh model (target: $\geq$ 0,85).
+
+\end{enumerate}
+
+Keempat, \textbf{analisis residual}. Residual model dianalisis untuk:
+
+\begin{enumerate}
+
+\item Uji normalitas menggunakan Shapiro-Wilk test untuk memverifikasi bahwa residual terdistribusi normal.
+
+\item Uji autokorelasi menggunakan ACF/PACF plots dan Ljung-Box test untuk mendeteksi korelasi temporal yang tersisa dalam residual.
+
+\item Deteksi overfitting dengan membandingkan metrik (RMSE, MAE, R²) antara data training dan test untuk memastikan model tidak hanya menghafal data training.
+
+\end{enumerate}
+
+\subsection{Kriteria Keberhasilan}
+
+Kesuksesan penelitian dievaluasi berdasarkan lima kriteria yang terukur dan objektif, yang semuanya terkait dengan kebutuhan fungsional (F1-F6) dan nonfungsional (NF1-NF4) yang telah didefinisikan pada Bab III.
+
+\begin{table}[h]
+  \begin{tabular}{ | c | p{3cm} | p{3.5cm} | p{3.5cm} |}
+  \hline
+  \textbf{No.} & \textbf{Kriteria} & \textbf{Target} & \textbf{Keterangan} \\
+  \hline
+  1 & RMSE model hybrid lebih rendah dari baseline terbaik & $\geq$ 15\% improvement & Menjawab kebutuhan NF1 (akurasi) \\
+  \hline
+  2 & R² model hybrid & $\geq$ 0,85 & Menjawab kebutuhan F1 dan F4 (prediksi akurat) \\
+  \hline
+  3 & Model tidak overfitting & Selisih R² train-test $<$ 0,10 & Menjawab kebutuhan NF2 (robustness) \\
+  \hline
+  4 & SHAP mengidentifikasi top 5 fitur penting & Ya, teridentifikasi dengan jelas & Menjawab kebutuhan F5 dan NF3 (explainability) \\
+  \hline
+  5 & Eksperimen dapat direplikasi & Skrip Python terdokumentasi di GitHub & Menjawab kebutuhan NF4 (reproducibility) \\
+  \hline
+  \end{tabular}
+\caption{Kriteria keberhasilan penelitian}
+\label{tbl:kriteria}
+\end{table}
+
+Kelima kriteria ini dirancang agar objective, measurable, dan achievable dalam timeline 11 minggu dengan resources yang tersedia. Jika semua kriteria terpenuhi, penelitian dianggap berhasil mengembangkan model prediksi PM\textsubscript{10} Jakarta yang akurat, robust, dan interpretable.
+
+\section{Analisis Risiko}
+
+Bagian ini mengidentifikasi risiko potensial yang mungkin menghambat penelitian beserta strategi mitigasi yang realistis dan actionable.
+
+\begin{longtable}{@{\extracolsep{\fill}} c p{1.8cm} p{2.2cm} p{2cm} p{3.6cm}}
+\caption{Analisis risiko dan strategi mitigasi}\label{tbl:risiko} \\
+\toprule
+\textbf{No.} & \textbf{Risiko} & \textbf{Penyebab} & \textbf{Dampak} & \textbf{Mitigasi} \\
+\midrule
+\endfirsthead
+
+\caption{Analisis risiko dan strategi mitigasi (lanjutan)} \\
+\toprule
+\textbf{No.} & \textbf{Risiko} & \textbf{Penyebab} & \textbf{Dampak} & \textbf{Mitigasi} \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{5}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+1 & Keterbatasan hardware untuk training & Proses training model kompleks memerlukan komputasi besar; MacBook M3 hanya mengandalkan CPU & Training berlangsung lama, berpotensi melewati jadwal yang direncanakan & Menggunakan Google Colab Pro dengan dukungan GPU yang reliable. Colab Pro menyediakan resources yang cukup untuk model ini dengan estimasi training 20--30 menit per iterasi. \\
+2 & Data quality issues (missing values terlalu banyak) & Data ISPU dari berbagai sumber mungkin tidak lengkap atau tidak konsisten & Akurasi model menurun dan hasil prediksi menjadi kurang dapat dipercaya & Menggunakan beberapa metode imputasi (rolling mean, interpolasi). Jika persentase data hilang $>$10\%, menambahkan data dari BMKG atau stasiun cuaca alternatif sebagai pendukung. \\
+3 & Model tidak mencapai target akurasi R² $\geq$ 0{,}85 & Feature selection kurang optimal atau hyperparameter tuning tidak konvergen & Kriteria keberhasilan tidak terpenuhi, sehingga perlu revisi desain atau timeline & Melakukan intensive hyperparameter tuning menggunakan Grid Search. Mencoba kombinasi hyperparameter yang berbeda (misalnya jumlah pohon RF, order ARIMA p-d-q). Mencoba metode ensemble lain seperti Stacking atau Voting menggunakan kombinasi RF, ARIMA, dan XGBoost. Jika tetap tidak tercapai, dokumentasikan sebagai limitation dan investigasi root cause di hasil penelitian. \\
+4 & Komunikasi dengan pembimbing terhambat & Jadwal pembimbing padat, waktu respon lambat, atau terjadi mis-komunikasi terkait arah penelitian & Progress penelitian melambat, muncul banyak rework, dan deadline berpotensi terlewat & Menjadwalkan pertemuan rutin (misalnya dua minggu sekali). Mengirimkan progress report tertulis melalui GitHub atau email untuk memungkinkan umpan balik asinkron. Menjaga dokumentasi yang rapi agar diskusi lebih efektif. \\
+5 & Timeline tidak realistis & Adanya unexpected issues (bug, masalah data), atau underestimation effort & Deadline terlewat dan kualitas hasil penelitian menurun & Menyediakan buffer waktu sekitar 20\% di setiap tahap. Memprioritaskan core deliverables, sedangkan fitur tambahan dapat ditunda. Menerapkan pendekatan Agile dengan weekly sprint review untuk memantau progres dan menyesuaikan rencana. \\
+\end{longtable}
+
+Semua risiko yang teridentifikasi memiliki strategi mitigasi yang concrete dan feasible dengan resources yang ada. Strategi tersebut dirancang agar proactive (mencegah risiko terjadi) dan reactive (handle jika risiko terjadi). Monitoring berkelanjutan terhadap risiko akan dilakukan setiap minggu untuk memastikan early warning dan quick corrective actions jika diperlukan.

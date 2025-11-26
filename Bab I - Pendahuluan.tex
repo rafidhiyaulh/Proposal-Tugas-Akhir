@@ -5,34 +5,120 @@
 \label{chap:pendahuluan}
 % --- Latar Belakang ---
 \section{Latar Belakang}
-Latar Belakang menjelaskan dasar pemikiran, motivasi, kebutuhan, alasan, atau urgensi pemilihan masalah tugas akhir. Subbab ini berisi penjelasan ringkas tentang kondisi atau situasi yang ada saat ini terkait dengan topik yang dibahas. Tujuan utamanya adalah untuk memberikan informasi secukupnya kepada pembaca agar memahami topik yang akan dibahas. Dalam subbab ini, jelaskan hal-hal berikut ini:
-\begin{enumerate}
-\item	Kondisi atau situasi topik yang dibahas beserta permasalahannya, misalnya tentang pengelolaan informasi di puskesmas daerah pedesaan dan masalah yang dihadapi.
-\item	Berbagai solusi yang telah diterapkan atau solusi yang tersedia dan memungkinkan untuk diterapkan untuk menyelesaikan masalah tersebut.
-\end{enumerate}
+
+DKI Jakarta sebagai ibu kota Indonesia dengan populasi lebih dari 10 juta jiwa menghadapi permasalahan serius terkait polusi udara. Analisis WRI Indonesia terhadap data tahun 2019 hingga 2021 menunjukkan bahwa konsentrasi rata-rata bulanan PM\textsubscript{2,5} mengikuti pola musiman dengan puncak polusi mencapai 40--80 µg/m³ pada musim kemarau \cite{firdaus2023jakarta}. Kualitas udara Jakarta pada tahun 2019 tercatat lima kali lebih buruk dibandingkan pedoman WHO, dengan peningkatan rata-rata \textit{Air Quality Index} (AQI) sebesar 69\% antara Juni 2017 dan Juni 2020 \cite{aulia2024air}. Pusat Krisis Kesehatan Kementerian Kesehatan Republik Indonesia melaporkan bahwa nilai ISPU di Jakarta Timur, Selatan, dan Barat berada pada kategori tidak sehat, dengan dampak langsung berupa gangguan pernapasan dan iritasi mata \cite{kemkes2019air}.
+
+Partikulat PM\textsubscript{10} memiliki dampak signifikan terhadap kesehatan. \textcite{zhang2021association} menunjukkan bahwa setiap peningkatan 10 µg/m³ PM\textsubscript{10} berhubungan dengan peningkatan kunjungan unit gawat darurat sebesar 0,14\% untuk penyakit kardiovaskular dan 0,56\% untuk aritmia. \textcite{kyung2020particulate} melaporkan peningkatan 2,7\% pada hospitalisasi COPD dan 1,1\% pada mortalitas COPD untuk setiap kenaikan 10 µg/m³ PM\textsubscript{10}. Pemerintah Indonesia telah mengatur pemantauan kualitas udara melalui Indeks Standar Pencemar Udara (ISPU) yang berfungsi sebagai sistem peringatan dini bagi masyarakat dan bahan pertimbangan dalam upaya pengendalian pencemaran udara \cite{permenlhk2020ispu,chaniago2020ispu}.
+
+Dalam konteks prediksi kualitas udara menggunakan \textit{machine learning}, model \textit{hybrid} yang menggabungkan \textit{Random Forest} dan ARIMA telah menunjukkan performa menjanjikan. \textcite{yenkikar2025explainable} mengembangkan model \textit{hybrid Random Forest Regressor} (RFR) dengan ARIMA yang mencapai R² = 0,94 untuk prediksi AQI di India. Namun, penelitian tersebut secara eksplisit menyatakan keterbatasan bahwa model mengecualikan faktor eksternal dan hanya menggunakan nilai konsentrasi polutan mentah tanpa mengeksplorasi pola temporal, fitur statistik, dan interaksi antar polutan yang dapat meningkatkan akurasi prediksi. Penelitian terkini menunjukkan pentingnya \textit{feature engineering}, dengan \textcite{naz2024two} melaporkan peningkatan performa model sebesar 5--86\% melalui pendekatan \textit{feature engineering} dua tahap yang menghasilkan 22 fitur mencakup kategori temporal, statistik, dan polutan. \textcite{chen2025hybrid} menunjukkan bahwa integrasi fitur tambahan dapat mengurangi RMSE sebesar 4,216--8,458 untuk prediksi polutan udara.
+
+Penelitian prediksi kualitas udara Jakarta menggunakan \textit{machine learning} masih terbatas. \textcite{alarsy2025pm25} mengembangkan model prediksi PM\textsubscript{2,5} Jakarta menggunakan \textit{Random Forest} yang mencapai R² = 0,61, sementara \textcite{radjabaycolle2025improving} menerapkan LSTM dengan analisis SHAP untuk Jakarta, menunjukkan pentingnya \textit{explainability} dalam mendukung intervensi kebijakan berbasis bukti.
+
+Berdasarkan analisis tersebut, penelitian ini mengembangkan model prediksi PM\textsubscript{10} Jakarta dengan meningkatkan arsitektur \textit{hybrid Random Forest}-ARIMA melalui strategi \textit{feature engineering} sistematis yang mengekstraksi informasi temporal, statistikal, dan interaksi polutan. Model diterapkan pada dataset Jakarta 15 tahun (2010--2025) dengan fokus PM\textsubscript{10} untuk meningkatkan kepraktisan dan skalabilitas. Analisis \textit{explainability} menggunakan SHAP \cite{molnar2025shap} diintegrasikan untuk mengidentifikasi faktor-faktor kunci yang mendorong polusi PM\textsubscript{10} Jakarta, memberikan wawasan untuk pengambilan keputusan kebijakan berbasis bukti.
 
 % --- Rumusan Masalah ---
 \section{Rumusan Masalah}
-Rumusan Masalah berisi masalah utama yang dibahas dalam tugas akhir. Rumusan masalah yang baik memiliki struktur sebagai berikut:
-\begin{enumerate}
-\item	Pokok persoalan dari kondisi atau situasi yang ada saat ini. Dengan kata lain, jelaskan kelemahan atau kekurangan dari kondisi, situasi, atau solusi yang dijelaskan pada latar belakang. Ini merupakan pokok rumusan masalah.
-\item	Elaborasi lebih lanjut urgensi penyelesaian masalah tersebut (mengapa penting untuk diselesaikan dan akibat yang dapat terjadi jika tidak diselesaikan).
-\item	Usulan singkat terkait dengan solusi yang ditawarkan untuk menyelesaikan persoalan.
-Penting untuk diperhatikan bahwa persoalan yang dideskripsikan pada subbab ini akan dipertanggungjawabkan di bab Evaluasi (apakah terselesaikan atau tidak).
-\end{enumerate}
+
+Berdasarkan latar belakang pada subbab I.1, maka ditetapkan rumusan masalah untuk proposal tugas akhir ini adalah: ``Bagaimana meningkatkan akurasi prediksi PM\textsubscript{10} Jakarta melalui \textit{feature engineering} pada model \textit{hybrid} Random Forest-ARIMA, dan bagaimana mengidentifikasi faktor-faktor utama penyebab polusi menggunakan SHAP?''
+
+Model prediksi AQI yang ada hanya menggunakan nilai konsentrasi polutan mentah tanpa mengeksplorasi pola temporal dan statistik \cite{yenkikar2025explainable}, padahal \textit{feature engineering} dapat meningkatkan performa hingga 86\% \cite{naz2024two}. Kesenjangan ini menciptakan peluang untuk mengembangkan model dengan 15 fitur yang menangkap pola temporal, trend, dan variasi musiman Jakarta.
+
+Urgensi penyelesaian masalah ini tinggi karena peningkatan akurasi prediksi PM\textsubscript{10} akan memungkinkan Dinas Lingkungan Hidup Jakarta untuk \textit{early warning system} yang lebih efektif dan mendukung keputusan kebijakan untuk melindungi 10 juta penduduk dari dampak kesehatan polusi.
+
+Solusi yang diusulkan adalah mengembangkan model \textit{hybrid Random Forest}-ARIMA dengan 15 fitur \textit{engineering} (lag, \textit{rolling statistics}, temporal, interaksi polutan) yang diharapkan mencapai peningkatan akurasi 15--20\%, serta menggunakan SHAP untuk mengidentifikasi faktor-faktor kunci yang mendorong polusi PM\textsubscript{10}.
 
 % --- Tujuan ---
 \section{Tujuan}
-Tuliskan tujuan utama dan/atau tujuan detail yang akan dicapai dalam pelaksanaan tugas akhir. Fokuskan pada hasil akhir yang ingin diperoleh setelah tugas akhir diselesaikan, terkait dengan penyelesaian persoalan pada rumusan masalah. Penting untuk diperhatikan bahwa tujuan yang dideskripsikan pada subbab ini akan dipertanggungjawabkan di akhir pelaksanaan tugas akhir apakah tercapai atau tidak. Tuliskan kriteria keberhasilan tugas akhir ini.
 
+Beberapa tujuan dari penelitian tugas akhir ini sebagai berikut:
+
+\begin{enumerate}
+
+\item Meningkatkan akurasi prediksi PM\textsubscript{10} Jakarta melalui pengembangan model \textit{hybrid} Random Forest-ARIMA dengan \textit{feature engineering} sistematis yang menghasilkan peningkatan akurasi minimal 15\% dibandingkan baseline dalam hal metrik RMSE.
+
+\item Mengidentifikasi fitur-fitur terpenting yang berkontribusi terhadap prediksi PM\textsubscript{10} Jakarta menggunakan analisis SHAP untuk memberikan wawasan tentang faktor-faktor utama penyebab polusi.
+
+\item Mendemonstrasikan efektivitas pendekatan \textit{feature engineering} pada dataset Jakarta dengan data historis 15 tahun (2010--2025) untuk membangun model prediksi yang dapat diterapkan dalam sistem peringatan dini kualitas udara.
+
+\end{enumerate}
 % --- Batasan Masalah ---
 \section{Batasan Masalah}
-Tuliskan batasan-batasan yang diambil dalam pelaksanaan tugas akhir. Batasan ini dapat dihindari (bersifat opsional, tidak perlu ada) jika topik atau judul tugas akhir dibuat cukup spesifik.
+
+Pada bagian ini, dituliskan batasan-batasan masalah yang digunakan secara rinci untuk memperjelas cakupan penelitian yang dilakukan. Batasan-batasan tersebut, antara lain:
+
+\begin{enumerate}
+
+\item Prediksi PM\textsubscript{10} dalam penelitian ini spesifik untuk wilayah DKI Jakarta menggunakan data dari lima stasiun pemantauan kualitas udara.
+
+\item Dataset yang digunakan adalah data historis harian ISPU Jakarta mulai dari Januari 2010 hingga Februari 2025 yang bersumber dari Kaggle.
+
+\item Model prediksi menggunakan lima polutan utama (PM\textsubscript{10}, SO\textsubscript{2}, CO, O\textsubscript{3}, NO\textsubscript{2}) tanpa mengintegrasikan data eksternal seperti data cuaca, lalu lintas, atau satelit.
+
+\item Pengembangan model prediksi tidak mencakup tahap \textit{deployment} ke dalam sistem operasional Dinas Lingkungan Hidup DKI Jakarta, tetapi fokus pada pengembangan dan evaluasi model.
+
+\item Prediksi bersifat prediksi harian (daily forecast) dan tidak mencakup prediksi dengan granularitas lebih tinggi seperti per jam atau per lokasi spesifik.
+
+\end{enumerate}
 
 % --- Metodologi Pengerjaan TA ---
 \section{Metodologi}
-Tuliskan semua tahapan yang akan dilalui selama pelaksanaan tugas akhir. Tahapan ini spesifik untuk menyelesaikan persoalan tugas akhir. Khusus untuk penyusunan proposal ini, jelaskan secara detail:
+
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+      \includegraphics[width=0.25\textwidth]{image/gambar1.png}
+  \caption{Metodologi \textit{Design Science Research Methodology} (DSRM) \cite{haryanti2022dsrm}}
+  \label{gambar:dsrm}
+\end{figure}
+
+Metodologi yang digunakan dalam pelaksanaan penelitian tugas akhir ini adalah \textit{Design Science Research Methodology} (DSRM) seperti pada Gambar \ref{gambar:dsrm}. DSRM merupakan kerangka kerja terstruktur untuk mengembangkan dan mengevaluasi artefak berbasis teknologi informasi \cite{haryanti2022dsrm}. Penelitian ini mengembangkan model \textit{hybrid} Random Forest-ARIMA dari \textcite{yenkikar2025explainable} dengan tiga pengembangan utama:
+
 \begin{enumerate}
-\item	Tahapan investigasi pengumpulan fakta di latar belakang untuk merumuskan masalah.
-\item	Langkah-langkah pencarian, pengelompokan, dan penapisan literatur atau sumber informasi untuk mengumpulkan informasi yang relevan tentang topik yang diangkat, termasuk teori (konsep atau teori apa saja yang perlu dicari), hal-hal yang telah dicapai oleh orang lain (cara mencari dan kata kuncinya), dan berbagai informasi pendukung, untuk mencari solusi terhadap masalah yang dibahas. Gunakan metodologi yang tepat dalam menggali informasi dan dokumentasikan prosesnya (termasuk rekaman wawancara atau survei) di dalam Lampiran, termasuk tautan ke video atau foto. Hasil penggalian informasi ini akan dijelaskan secara sistematis di Bab II Studi Literatur.
+
+\item Penerapan pada konteks Jakarta dengan data historis 15 tahun (2010--2025)
+
+\item Penambahan 10 fitur hasil \textit{feature engineering} dari 5 fitur baseline menjadi 15 fitur, mencakup fitur lag, \textit{rolling statistics}, temporal, dan interaksi polutan
+
+\item Fokus pada PM\textsubscript{10} karena merupakan polutan dominan di Jakarta yang berasal dari sumber mekanis seperti debu jalan, konstruksi, dan keausan kendaraan \cite{firdaus2023jakarta}, memiliki dampak signifikan pada sistem respirasi dan kardiovaskular \cite{zhang2021association,kyung2020particulate}, serta merupakan salah satu parameter utama dalam regulasi ISPU Indonesia \cite{permenlhk2020ispu}
+
+\end{enumerate}
+
+Terdapat lima tahap utama dalam prosesnya yang diadaptasi untuk penelitian ini.
+
+\begin{enumerate}
+
+\item \textit{Literature Review for Problem Identification}
+
+Pada tahap ini, dilakukan kajian literatur untuk mengidentifikasi permasalahan terkait polusi udara Jakarta dan keterbatasan model prediksi yang ada. Pencarian literatur dilakukan menggunakan basis data Google Scholar, IEEE Xplore, dan PubMed dengan kata kunci ``air quality prediction'', ``PM10 forecasting'', ``Random Forest ARIMA hybrid'', dan ``Jakarta air pollution''. Literatur difilter berdasarkan relevansi, tahun publikasi (2019--2025), dan kualitas jurnal. Paper \textcite{yenkikar2025explainable} diidentifikasi sebagai \textit{primary methodological foundation} yang akan dikembangkan.
+
+\item \textit{Identify Research Gap}
+
+Tahap ini bertujuan untuk mengidentifikasi kesenjangan penelitian dari literatur yang telah dikaji. \textcite{yenkikar2025explainable} secara eksplisit menyatakan keterbatasan bahwa model mengecualikan faktor eksternal dan hanya menggunakan 6 fitur polutan mentah tanpa mengeksplorasi pola temporal, fitur statistik, dan interaksi antar polutan. Kesenjangan ini menjadi peluang untuk mengembangkan model dengan pendekatan \textit{feature engineering} sistematis yang dapat meningkatkan akurasi prediksi.
+
+\item \textit{Purposed DSRM Approach for Developing Artifact}
+
+Pada tahap ini, diusulkan pendekatan pengembangan artefak berupa model prediksi PM\textsubscript{10} Jakarta yang meningkatkan model baseline \cite{yenkikar2025explainable}. Pengembangan yang dilakukan meliputi ekspansi fitur dari 5 fitur baseline menjadi 15 fitur melalui \textit{feature engineering}, integrasi analisis SHAP untuk \textit{explainability} dan identifikasi faktor kunci polusi Jakarta, serta penerapan pada konteks geografis Jakarta dengan data 15 tahun untuk meningkatkan kepraktisan dan skalabilitas model.
+
+\item \textit{Identify DSRM Step}
+
+Tahap ini mendefinisikan langkah-langkah detail dalam pengembangan artefak sebagai berikut:
+
+\begin{enumerate}
+
+\item \textit{Data preprocessing} untuk menangani data hilang dan agregasi multi-stasiun
+
+\item \textit{Feature engineering} untuk menghasilkan 15 fitur
+
+\item Pelatihan model \textit{hybrid} Random Forest-ARIMA dengan pembagian data 80:20
+
+\item \textit{Hyperparameter tuning} untuk memaksimalkan performa model
+
+\item Evaluasi menggunakan metrik RMSE, MAE, dan R² dengan target peningkatan akurasi minimal 15\% dibandingkan baseline
+
+\end{enumerate}
+
+\item \textit{Case Study -- Implementation DSRM}
+
+Tahap terakhir adalah implementasi melalui studi kasus prediksi PM\textsubscript{10} Jakarta menggunakan dataset ISPU dari Kaggle \cite{pohan2025jakarta} dengan rentang waktu Januari 2010 hingga Februari 2025. Perbandingan performa dilakukan antara model baseline (5 fitur) dan model yang dikembangkan (15 fitur). Analisis SHAP dilakukan untuk mengidentifikasi kontribusi setiap fitur, memberikan wawasan tentang faktor-faktor utama yang mendorong polusi PM\textsubscript{10} di Jakarta untuk mendukung kebijakan berbasis bukti.
+
 \end{enumerate}

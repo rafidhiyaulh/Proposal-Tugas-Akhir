@@ -1,289 +1,246 @@
 % ==========================================
 % BAB II STUDI LITERATUR
 % ==========================================
-\chapter{STUDI LITERATUR}
-\label{chap:studi-literatur}
-\section{Penulisan Gambar, Tabel, Rumus, dan Kode}
-\lipsum[1]
+\chapter{Studi Literatur}
 
-\subsection{Gambar}
-Contoh gambar dapat dilihat pada Gambar \ref{gambar:jaringan}. Gambar dan judulnya diposisikan di tengah. Nomor gambar tidak diakhiri tanda titik. Gambar tersebut dibuat menggunakan aplikasi draw.io dan disimpan ke format PNG setelah dengan zoom setting pada angka 300\%. Ukuran gambar yang ditampilkan dapat diatur dengan mengubah nilai \textit{width} dalam sintaks \textit{includegraphics}.
+\section{Kualitas Udara dan PM\textsubscript{10}}
 
-\begin{figure}[t] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
-	\centering
+Kualitas udara merupakan indikator penting kesehatan lingkungan yang dipengaruhi oleh berbagai polutan. Salah satu polutan utama adalah \textit{Particulate Matter} (PM), yaitu partikel padat atau cair yang tersuspensi di udara. PM dikategorikan berdasarkan diameter aerodinamisnya, dengan PM\textsubscript{10} merujuk pada partikel dengan diameter kurang dari 10 mikrometer dan PM\textsubscript{2,5} merujuk pada partikel dengan diameter kurang dari 2,5 mikrometer \cite{carb2025inhalable}.
+
+PM\textsubscript{10} dan PM\textsubscript{2,5} memiliki karakteristik dan dampak kesehatan yang berbeda seperti ditunjukkan pada Tabel \ref{tbl:pm10vspm25}. PM\textsubscript{10} umumnya berasal dari sumber mekanis seperti debu jalan, aktivitas konstruksi, dan keausan ban kendaraan, sedangkan PM\textsubscript{2,5} lebih banyak berasal dari proses pembakaran seperti emisi kendaraan dan industri \cite{firdaus2023jakarta}.
+
+\begin{table}[h]
+  \begin{tabular}{ | p{3cm} | p{5cm} | p{5cm} |}
+  \hline
+  \textbf{Aspek} & \textbf{PM\textsubscript{10}} & \textbf{PM\textsubscript{2,5}} \\
+  \hline
+  Ukuran & $<$ 10 mikrometer & $<$ 2,5 mikrometer \\
+  \hline
+  Sumber utama & Debu jalan, konstruksi, keausan ban & Pembakaran, emisi kendaraan, industri \\
+  \hline
+  Penetrasi & Saluran pernapasan atas & Saluran pernapasan dalam, alveoli \\
+  \hline
+  Dampak kesehatan & Iritasi, asma, COPD & Kardiovaskular, stroke, kanker paru \\
+  \hline
+  \end{tabular}
+\caption{Perbandingan karakteristik PM\textsubscript{10} dan PM\textsubscript{2,5}}
+\label{tbl:pm10vspm25}
+\end{table}
+
+Dampak kesehatan PM\textsubscript{10} telah terdokumentasi dengan baik dalam literatur. \textcite{zhang2021association} melaporkan bahwa setiap peningkatan 10 µg/m³ konsentrasi PM\textsubscript{10} berhubungan dengan peningkatan kunjungan unit gawat darurat sebesar 0,14\% untuk penyakit kardiovaskular dan 0,56\% untuk aritmia. Pada sistem pernapasan, \textcite{kyung2020particulate} menemukan bahwa peningkatan 10 µg/m³ PM\textsubscript{10} berasosiasi dengan peningkatan 2,7\% pada hospitalisasi \textit{Chronic Obstructive Pulmonary Disease} (COPD) dan 1,1\% pada mortalitas COPD.
+
+\begin{figure}[h]
+  \centering
   \captionsetup{justification=centering}
-    	\includegraphics[width=0.7\textwidth]{image/gambar1.png}
-	\caption{Contoh gambar jaringan}
-	\label{gambar:jaringan}
+      \includegraphics[width=0.9\textwidth]{image/gambar6.png}
+  \caption{Dataset ISPU Jakarta 2010--2025 dari Kaggle menunjukkan distribusi 6 polutan utama}
+  \label{gambar:dataset-ispu}
 \end{figure}
 
-Gambar umumnya tidak jelas atau kabur jika gambar tersebut:
-\begin{enumerate}[a.]
-  \item diperoleh dari hasil cropping pada suatu halaman buku atau situs web;
-  \item hasil pembesaran gambar yang gambar aslinya sebenarnya berukuran kecil; atau
-  \item disimpan dalam resolusi kecil
-\end{enumerate}
-Ketidakjelasan gambar ini dapat dilihat pada garis-garis diagram yang tidak tegas dan tulisan-tulisan dalam gambar yang tampak kabur dan kurang jelas terbaca.
+Dataset ISPU Jakarta yang digunakan dalam penelitian ini mencakup periode 2010--2025 yang terdiri dari data temporal (tanggal, stasiun), konsentrasi lima polutan utama (PM\textsubscript{10}, SO\textsubscript{2}, CO, O\textsubscript{3}, NO\textsubscript{2}), dan nilai ISPU agregat dari lima stasiun pemantauan (DKI1--DKI5). Gambar \ref{gambar:dataset-ispu} menunjukkan distribusi konsentrasi keenam polutan utama dengan PM\textsubscript{10} menunjukkan variasi yang signifikan (rentang 2--187 µg/m³), mengindikasikan pentingnya prediksi akurat untuk sistem peringatan dini.
 
-Untuk mendapatkan gambar yang tidak kabur (\textit{blur}), langkah-langkah berikut dapat digunakan:
-\begin{enumerate}[(a)]
-\item Gambar yang didapat di suatu pustaka atau referensi sebaiknya digambar ulang, misalnya menggunakan PowerPoint, Canva, Figma, draw.io, atau yang lainnya.
-\item Jika diagram atau ilustrasi digambar menggunakan draw.io, saat gambar disimpan ke format PNG atau JPG (\textit{export as}), lakukan \textit{zoom} ke minimal 300\% (\textit{the default value is} 100\%). 
-\item Jika diagram digambar dengan menggunakan PowerPoint, gambar dapat langsung di-\textit{copy-paste} ke Word.
-\end{enumerate}
+Di Jakarta, PM\textsubscript{10} merupakan polutan dominan yang berasal dari kombinasi lalu lintas padat dengan lebih dari 20 juta kendaraan bermotor, aktivitas konstruksi yang intensif, dan debu jalan akibat kondisi infrastruktur yang bervariasi \cite{firdaus2023jakarta}. Kondisi ini menjadikan prediksi PM\textsubscript{10} sangat relevan untuk sistem peringatan dini kualitas udara Jakarta.
 
-\subsection{Tabel}
-Tabel ada dua jenis, yaitu tabel yang bisa termuat dalam satu halaman dan tabel yang sangat panjang sehingga tidak muat dalam satu halaman.
-\subsubsection{Tabel yang Muat dalam Satu Halaman}
-Contoh tabel dapat dilihat pada Tabel \ref{tbl:harga1} dan \ref{tbl:harga2}. Tabel dan judulnya dibuat rata kiri dan judul tabel diletakkan di atas tabel. Usahakan tabel dapat ditulis dalam satu halaman, tidak terpotong ke halaman berikutnya.
+\section{Indeks Standar Pencemar Udara (ISPU)}
 
-\begin{table}[t] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
-  \begin{tabular}{ | p{2cm} | p{2cm} | p{3cm} |}
-	\hline
-	Nama 	& Satuan 		& Harga \\
-	\hline
-	Buku 	& Exemplar	& 25000 \\
-	Komputer	& Unit		& 2500000 \\
-	Pensil	& Buah		& 118900 \\
-	\hline
-	\end{tabular}
-\caption{Tabel harga bahan pokok}
-\label{tbl:harga1}
+Indeks Standar Pencemar Udara (ISPU) adalah angka tanpa satuan yang menggambarkan kondisi mutu udara ambien di lokasi dan waktu tertentu berdasarkan dampak terhadap kesehatan manusia, nilai estetika, dan makhluk hidup lainnya \cite{permenlhk2020ispu}. ISPU diatur dalam Peraturan Menteri Lingkungan Hidup dan Kehutanan Nomor P.14/MENLHK/\allowbreak SETJEN/\allowbreak KUM.1/\allowbreak 7/\allowbreak 2020 yang mendefinisikan tujuh parameter polutan: PM\textsubscript{10}, PM\textsubscript{2,5}, SO\textsubscript{2}, CO, O\textsubscript{3}, NO\textsubscript{2}, dan HC.
+
+ISPU berfungsi sebagai bahan informasi kepada masyarakat tentang kualitas udara di lokasi dan waktu tertentu, bahan pertimbangan pemerintah dalam melakukan upaya pengendalian pencemaran udara, dan sebagai sistem peringatan dini (\textit{early warning system}) bagi masyarakat \cite{chaniago2020ispu}. Kategori ISPU dan dampaknya terhadap kesehatan ditunjukkan pada Tabel \ref{tbl:ispu}.
+
+\begin{table}[h]
+  \begin{tabular}{ | c | l | p{7cm} |}
+  \hline
+  \textbf{Rentang} & \textbf{Kategori} & \textbf{Dampak Kesehatan} \\
+  \hline
+  0--50 & Baik & Tidak memberikan efek bagi kesehatan \\
+  \hline
+  51--100 & Sedang & Tidak berpengaruh pada kesehatan manusia atau hewan, namun berpengaruh pada tumbuhan sensitif \\
+  \hline
+  101--200 & Tidak Sehat & Merugikan manusia atau kelompok yang sensitif \\
+  \hline
+  201--300 & Sangat Tidak Sehat & Dapat merugikan kesehatan pada sejumlah segmen populasi yang terpapar \\
+  \hline
+  $>$300 & Berbahaya & Dapat menimbulkan efek kesehatan serius pada seluruh populasi \\
+  \hline
+  \end{tabular}
+\caption{Kategori ISPU dan dampak kesehatan \cite{septiani2024combating}}
+\label{tbl:ispu}
 \end{table}
 
+\section{\textit{Machine Learning} untuk Prediksi Kualitas Udara}
 
+Pendekatan \textit{machine learning} telah banyak diterapkan untuk prediksi kualitas udara karena kemampuannya menangkap pola kompleks dan non-linier dalam data lingkungan. Penelitian ini menggunakan model \textit{hybrid} yang menggabungkan \textit{Random Forest} dan ARIMA untuk memanfaatkan kelebihan kedua pendekatan tersebut.
 
-\begin{table}[t] % pilihan opsi yang disarankan: t = top, b = bottom, h = here
-	\begin{tabular}{ | l | c | r | }
-	\hline
-	Nama 	& Satuan 		& Harga \\
-	\hline
-	Buku 	& Exemplar	& 25000 \\
-	Komputer	& Unit		& 2500000 \\
-	Pensil	& Buah		& 118900 \\
-	\hline
-	\end{tabular}
-\caption{Tabel harga bahan sekunder}
-\label{tbl:harga2}
-\end{table}
+\subsection{\textit{Random Forest}}
 
-% -- Example of importing table from external file --
-\subsubsection{Mengimpor Tabel dari Berkas Eksternal}
+\textit{Random Forest} adalah algoritma \textit{ensemble learning} yang mengkombinasikan prediksi dari banyak pohon keputusan (\textit{decision trees}) untuk menghasilkan prediksi yang lebih akurat dan robust \cite{alarsy2025pm25}. Setiap pohon dalam \textit{Random Forest} dilatih menggunakan subset acak dari data pelatihan (\textit{bootstrap sampling}) dan subset acak dari fitur pada setiap \textit{split node}.
 
-Tabel \ref{tbl:harga3} diimpor dari berkas eksternal \textit{table/tabel1.tex} menggunakan perintah \textit{input}. 
-Dengan demikian, jika tabel tersebut perlu diubah, cukup mengubah pada berkas eksternal tersebut tanpa perlu mengubah pada berkas utama ini.
+Untuk tugas regresi, prediksi \textit{Random Forest} dihitung sebagai rata-rata prediksi dari semua pohon dalam ensemble seperti pada Persamaan \ref{eq:rf}.
 
-\input table/tabel1.tex
-
-
-% -- Example of long table --
-\subsubsection{Tabel yang Sangat Panjang}
-Jika tabel terlalu panjang sehingga tidak muat dalam satu halaman, gunakan paket 
-\textit{longtable} untuk membuat tabel yang dapat terpotong ke halaman berikutnya, 
-seperti pada Tabel \ref{tbl:longtable1}.
-
-\begin{longtable}{@{\extracolsep{\fill}} l c r r}
-\caption{Comprehensive Data Table Example}\label{tbl:longtable1} \\
-\toprule
-\textbf{ID} & \textbf{Name} & \textbf{Score} & \textbf{Rank} \\
-\midrule
-\endfirsthead
-
-\caption{Comprehensive Data Table Example (lanjutan)} \\
-\toprule
-\textbf{ID} & \textbf{Name} & \textbf{Score} & \textbf{Rank} \\
-\midrule
-\endhead
-
-\midrule
-\multicolumn{4}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-%\bottomrule
-\endfoot
-
-\bottomrule
-\endlastfoot
-
-% === Table Data ===
-1 & Alice Smith & 89 & 5 \\
-2 & Bob Johnson & 93 & 3 \\
-3 & Carol Davis & 95 & 2 \\
-4 & Daniel Wilson & 88 & 6 \\
-5 & Eve Thompson & 97 & 1 \\
-6 & Frank Brown & 85 & 7 \\
-7 & Grace Lee & 91 & 4 \\
-8 & Henry Miller & 80 & 9 \\
-9 & Irene Garcia & 83 & 8 \\
-10 & Jack Robinson & 78 & 10 \\
-% Repeat with more rows to make it long
-11 & Kevin Harris & 76 & 11 \\
-12 & Laura Martin & 75 & 12 \\
-13 & Michael Clark & 74 & 13 \\
-14 & Natalie Lewis & 73 & 14 \\
-15 & Olivia Walker & 72 & 15 \\
-16 & Peter Hall & 71 & 16 \\
-17 & Quinn Allen & 70 & 17 \\
-18 & Rachel Young & 69 & 18 \\
-19 & Samuel King & 68 & 19 \\
-20 & Tina Wright & 67 & 20 \\
-21 & Uma Scott & 66 & 21 \\
-22 & Victor Green & 65 & 22 \\
-23 & Wendy Adams & 64 & 23 \\
-24 & Xavier Nelson & 63 & 24 \\
-25 & Yolanda Carter & 62 & 25 \\
-26 & Zachary Perez & 61 & 26 \\
-27 & Amelia Baker & 60 & 27 \\
-28 & Benjamin Rivera & 59 & 28 \\
-29 & Charlotte Rogers & 58 & 29 \\
-30 & David Murphy & 57 & 30 \\
-31 & Ethan Cooper & 56 & 31 \\
-32 & Fiona Reed & 55 & 32 \\
-33 & George Bailey & 54 & 33 \\
-34 & Hannah Cox & 53 & 34 \\
-35 & Isaac Howard & 52 & 35 \\
-36 & Julia Ward & 51 & 36 \\
-37 & Kyle Flores & 50 & 37 \\
-38 & Lily Bell & 49 & 38 \\
-39 & Mason Sanders & 48 & 39 \\
-40 & Nora Patterson & 47 & 40 \\
-41 & Owen Ramirez & 46 & 41 \\
-42 & Penelope Torres & 45 & 42 \\
-43 & Quentin Foster & 44 & 43 \\
-44 & Rebecca Gonzales & 43 & 44 \\
-45 & Sebastian Bryant & 42 & 45 \\
-46 & Taylor Alexander & 41 & 46 \\
-47 & Ursula Russell & 40 & 47 \\
-48 & Vincent Griffin & 39 & 48 \\
-49 & William Diaz & 38 & 49 \\
-50 & Zoe Simmons & 37 & 50 \\
-% (You can easily extend this list to hundreds of rows)
-\end{longtable}
-
-\subsubsection{Beberapa Contoh Penulisan Rumus atau Persamaan Matematika Menggunakan LaTeX Termasuk Penomorannya}
-Contoh rumus matematika dapat ditulis seperti pada Persamaan \ref{eq:contoh1} di bawah ini. 
-Penomoran persamaan diletakkan di sebelah kanan, dan rumus ditulis dalam mode \textit{display math}.
 \begin{equation}
-E = mc^2
-\label{eq:contoh1}
+\hat{y}_{RF} = \frac{1}{B} \sum_{b=1}^{B} T_b(x)
+\label{eq:rf}
 \end{equation}
 
-Contoh lain penulisan rumus matematika yang lebih kompleks dapat ditulis seperti pada Persamaan \ref{eq:rumus2}.
+Keterangan:
+\begin{itemize}
+\item $\hat{y}_{RF}$ adalah prediksi \textit{Random Forest}
+\item $B$ adalah jumlah pohon dalam \textit{forest}
+\item $T_b(x)$ adalah prediksi dari pohon ke-$b$ untuk input $x$
+\end{itemize}
 
-\begin{align}
-f(x) &= ax^2 + bx + c \\
-f'(x) &= \frac{d}{dx}(ax^2 + bx + c) \notag \\ % tidak menampilkan nomor pada baris ini
-      &= 2ax + b \label{eq:rumus2}
-\end{align}
+Keunggulan \textit{Random Forest} untuk prediksi kualitas udara meliputi kemampuan menangani hubungan non-linier antar variabel, robust terhadap \textit{outlier} dan \textit{noise}, dapat menangani data dengan banyak fitur tanpa memerlukan seleksi fitur eksplisit, serta memberikan estimasi \textit{feature importance} yang berguna untuk interpretasi \cite{abdallah2025predicting}.
 
-Jika rumus terlalu panjang untuk ditulis dalam satu baris, gunakan lingkungan \textit{multline} seperti pada Persamaan \ref{eq:rumus3} di bawah ini.
-\begin{multline} 
-y = a_0 + a_1x + a_2x^2 + a_3x^3 + a_4x^4 + a_5x^5 + a_6x^6 + a_7x^7 \\
-    + a_8x^8 + a_9x^9 + a_{10}x^{10} \label{eq:rumus3}
-\end{multline}
+\subsection{ARIMA (\textit{AutoRegressive Integrated Moving Average})}
 
-Jika ada penurunan rumus yang terdiri dari beberapa baris, namun tidak memerlukan penomoran pada setiap baris, gunakan lingkungan \textit{align*}, misalnya:
+ARIMA adalah model statistik klasik untuk analisis dan peramalan data \textit{time series}. Model ARIMA cocok untuk data yang menunjukkan pola temporal seperti \textit{trend} dan musiman. ARIMA terdiri dari tiga komponen utama: \textit{AutoRegressive} (AR), \textit{Integrated} (I), dan \textit{Moving Average} (MA) \cite{yunis2024hybridization}.
 
-\begin{align*} 
-S &= \sum_{i=1}^{n} i^2 \\
-  &= 1^2 + 2^2 + 3^2 + \cdots + n^2 \\
-  &= \frac{n(n + 1)(2n + 1)}{6}
-\intertext{Contoh lainnya adalah rumus untuk mencari nilai rata-rata fungsi $f(x)$ pada interval $[p, q]$:}
-\bar{f} &= \frac{1}{q - p} \int_{p}^{q} f(x) \, dx \\
-        &= \frac{1}{q - p} \int_{p}^{q} (ax^2 + bx + c) \, dx \\
-        &= \frac{1}{q - p} \left[ \frac{a}{3}x^3 + \frac{b}{2}x^2 + cx \right]_p^q \\
-        &= \frac{a(q^3 - p^3)}{3(q - p)} + \frac{b(q^2 - p^2)}{2(q - p)} + c \label{eq:rumus4}
-\end{align*}
+Model ARIMA$(p,d,q)$ didefinisikan pada Persamaan \ref{eq:arima}.
 
+\begin{equation}
+\phi(L)(1-L)^d y_t = \theta(L)\epsilon_t
+\label{eq:arima}
+\end{equation}
 
+Keterangan:
+\begin{itemize}
+\item $y_t$ adalah nilai \textit{time series} pada waktu $t$
+\item $L$ adalah \textit{lag operator} ($Ly_t = y_{t-1}$)
+\item $\phi(L) = 1 - \phi_1 L - \phi_2 L^2 - \cdots - \phi_p L^p$ adalah polinomial AR
+\item $\theta(L) = 1 + \theta_1 L + \theta_2 L^2 + \cdots + \theta_q L^q$ adalah polinomial MA
+\item $d$ adalah orde diferensiasi untuk mencapai stasioneritas
+\item $\epsilon_t$ adalah \textit{white noise error}
+\end{itemize}
 
-\subsection{Algoritma, Pseudocode, atau Kode}
-Contoh penulisan algoritma atau pseudocode dapat ditulis seperti pada Kode \ref{alg:contoh1} di bawah ini. 
-Gunakan paket \textit{listings} untuk menulis source code dalam bahasa pemrograman tertentu, seperti pada Kode \ref{lst:contoh1}. 
+Sebelum menerapkan ARIMA, data harus diuji stasioneritas menggunakan uji \textit{Augmented Dickey-Fuller} (ADF). Jika data tidak stasioner, diferensiasi dilakukan hingga data menjadi stasioner \cite{vasconcelos2025stationarity}.
 
+\subsection{Model \textit{Hybrid Random Forest}-ARIMA}
 
-% -- Example of pseudocode and source code listing --
-% -- Gunakan minipage agar listing tidak terpotong ke halaman berikutnya --
-\begin{minipage}{\textwidth} 
-\begin{lstlisting}[frame=lines, captionpos=t, caption={Contoh pseudocode}, label={alg:contoh1}]
-ALGORITHM HelloWorld
-   PRINT "Hello, World!"
-END ALGORITHM
-\end{lstlisting}
-\end{minipage}
+Model \textit{hybrid} menggabungkan \textit{Random Forest} dan ARIMA untuk memanfaatkan kelebihan kedua pendekatan. \textit{Random Forest} efektif menangkap hubungan non-linier antar fitur, sedangkan ARIMA efektif memodelkan pola temporal pada residual \cite{yenkikar2025explainable}. Arsitektur model \textit{hybrid} ditunjukkan pada Gambar \ref{gambar:hybrid}.
 
-\begin{minipage}{\textwidth}
-\begin{lstlisting}[language=Python, frame=single, caption={Contoh source code Python}, captionpos=t, label={lst:contoh1}]
-def hello_world():
-    print("Hello, World!")       
-hello_world()
-\end{lstlisting}
-\end{minipage}
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+      \includegraphics[width=0.55\textwidth]{image/gambar2.png}
+  \caption{Arsitektur model \textit{hybrid Random Forest}-ARIMA \cite{yenkikar2025explainable}}
+  \label{gambar:hybrid}
+\end{figure}
 
+Proses prediksi \textit{hybrid} terdiri dari empat tahap. Pertama, \textit{Random Forest} dilatih menggunakan fitur polutan dan fitur hasil \textit{engineering} untuk memprediksi nilai PM\textsubscript{10}. Kedua, residual dihitung sebagai selisih antara nilai aktual dan prediksi \textit{Random Forest}. Ketiga, model ARIMA diterapkan pada residual untuk menangkap pola temporal yang tidak tertangkap \textit{Random Forest}. Keempat, prediksi akhir dihitung sebagai penjumlahan prediksi \textit{Random Forest} dan prediksi residual ARIMA seperti pada Persamaan \ref{eq:hybrid}.
 
-\section{Beberapa Kesalahan Penulisan yang Sering Terjadi}
-\subsection{Penggunaan Kata "di mana" atau "dimana"}
-Banyak yang menuliskan kata "di mana" atau "dimana" sebagai pengganti kata "which" dalam bahasa Inggris. 
-Padahal, penggunaan kata "di mana" atau "dimana" tidak tepat dalam konteks tersebut. Demikian juga untuk kata serupa, misalnya "yang mana".
-Kata "di mana" atau "dimana" ini harus diganti dengan kata lain, seperti "dengan", "tempat", "yang", dan sebagainya tergantung kalimatnya.
-Penjelasan lengkap dapat dilihat pada \autocite{BPBI}.
+\begin{equation}
+\hat{y}_{hybrid} = \hat{y}_{RF} + \hat{r}_{ARIMA}
+\label{eq:hybrid}
+\end{equation}
 
-\subsection{Penggunaan Kata "sedangkan" dan "sehingga"}
+Keterangan:
+\begin{itemize}
+\item $\hat{y}_{hybrid}$ adalah prediksi akhir model \textit{hybrid}
+\item $\hat{y}_{RF}$ adalah prediksi dari \textit{Random Forest}
+\item $\hat{r}_{ARIMA}$ adalah prediksi residual dari ARIMA
+\end{itemize}
 
-\begin{table}[t]
-  \begin{tabular}{|c|l|l|}
+\textcite{yenkikar2025explainable} melaporkan bahwa model \textit{hybrid} RF-ARIMA mencapai R² = 0,94 untuk prediksi AQI di India, menunjukkan efektivitas pendekatan ini dalam prediksi kualitas udara.
+
+\section{\textit{Feature Engineering} untuk \textit{Time Series}}
+
+\textit{Feature engineering} adalah proses membuat fitur baru dari data yang ada untuk meningkatkan performa model \textit{machine learning}. Dalam konteks prediksi kualitas udara, \textit{feature engineering} dapat mengekstraksi informasi temporal, statistikal, dan interaksi yang tidak tersedia dalam data mentah \cite{naz2024two}.
+
+\textcite{naz2024two} menunjukkan bahwa pendekatan \textit{feature engineering} dua tahap dapat meningkatkan performa prediksi polutan udara sebesar 5--86\% tergantung pada jenis polutan. \textcite{jimenez2024explainable} juga melaporkan bahwa teknik seleksi fitur temporal secara signifikan meningkatkan akurasi prediksi untuk pola \textit{time series} yang kompleks.
+
+Penelitian ini menggunakan 15 fitur yang terdiri dari 5 fitur baseline dan 10 fitur hasil \textit{engineering} seperti ditunjukkan pada Tabel \ref{tbl:features}. Fitur lag menangkap persistensi polusi dari hari-hari sebelumnya. Fitur \textit{rolling statistics} menangkap tren jangka pendek dan volatilitas. Fitur temporal menangkap pola musiman Jakarta (musim kemarau April--Oktober cenderung memiliki polusi lebih tinggi). Fitur interaksi CO $\times$ O\textsubscript{3} menangkap aktivitas fotokimia yang berkontribusi pada pembentukan PM\textsubscript{10} sekunder.
+
+\begin{table}[h]
+  \begin{tabular}{ | l | l | p{7cm} |}
   \hline
-  Kata & Salah & Benar \\ \hline
-  sedangkan & \begin{tabular}[c]{@{}c@{}}Sedangkan sistem lama masih\\ digunakan oleh banyak pengguna.\end{tabular} & \begin{tabular}[c]{@{}c@{}}Sistem lama masih digunakan\\ oleh banyak pengguna,\\ sedangkan sistem baru belum siap.\end{tabular} \\ \hline
-  sehingga & \begin{tabular}[c]{@{}c@{}}Sehingga sistem lama masih\\ digunakan oleh banyak pengguna.\end{tabular} & \begin{tabular}[c]{@{}c@{}}Sistem lama masih digunakan\\ oleh banyak pengguna sehingga\\ sistem baru belum siap.\end{tabular} \\ \hline
+  \textbf{Kategori} & \textbf{Fitur} & \textbf{Deskripsi} \\
+  \hline
+  Baseline & pm10 & Konsentrasi PM\textsubscript{10} hari ini \\
+  Baseline & so2 & Konsentrasi SO\textsubscript{2} \\
+  Baseline & co & Konsentrasi CO \\
+  Baseline & o3 & Konsentrasi O\textsubscript{3} \\
+  Baseline & no2 & Konsentrasi NO\textsubscript{2} \\
+  \hline
+  Lag & pm10\_lag1 & PM\textsubscript{10} 1 hari sebelumnya \\
+  Lag & pm10\_lag2 & PM\textsubscript{10} 2 hari sebelumnya \\
+  Lag & pm10\_lag7 & PM\textsubscript{10} 7 hari sebelumnya \\
+  \hline
+  \textit{Rolling} & pm10\_ma3 & \textit{Moving average} 3 hari \\
+  \textit{Rolling} & pm10\_ma7 & \textit{Moving average} 7 hari \\
+  \textit{Rolling} & pm10\_std7 & Standar deviasi 7 hari \\
+  \hline
+  Temporal & month & Bulan (1--12) \\
+  Temporal & is\_weekend & Akhir pekan (0/1) \\
+  Temporal & season & Musim (Hujan/Kemarau) \\
+  \hline
+  Interaksi & co\_times\_o3 & Interaksi CO $\times$ O\textsubscript{3} \\
+  \hline
   \end{tabular}
-  \caption{Contoh penggunaan kata "sedangkan" dan "sehingga"}
-  \label{tbl:sedangkan_sehingga}
+\caption{Daftar 15 fitur yang digunakan dalam penelitian}
+\label{tbl:features}
 \end{table}
 
-Kata "sedangkan" dan "sehingga" adalah kata hubung atau konjungsi. 
-Konjungsi adalah kata atau ungkapan yang menghubungkan satuan bahasa 
-(kata, frasa, klausa, dan kalimat). 
-Konjungsi dapat dibagi menjadi konjungsi intrakalimat dan antarkalimat.  
-Kata "sedangkan" menghubungkan dua klausa yang bersifat kontrasif, 
-sedangkan "sehingga" menghubungkan dua klausa yang bersifat kausal. 
-Dalam ragam formal, kata hubung “sedangkan” dan “sehingga” hanya dapat digunakan 
-sebagai konjungsi intrakalimat sehingga kedua konjungsi itu \textbf{tidak dapat diletakkan pada awal kalimat}.
-Selain itu, penggunaan kata "sedangkan" harus didahului oleh koma (,), sedangkan kata "sehingga" tidak perlu didahului oleh koma (,).
-Contoh penggunaan yang benar dan salah dapat dilihat pada Tabel \ref{tbl:sedangkan_sehingga}.
+\section{\textit{Explainable AI} dengan SHAP}
 
+\textit{Explainable AI} (XAI) adalah pendekatan untuk membuat model \textit{machine learning} lebih transparan dan dapat diinterpretasi. SHAP (\textit{SHapley Additive exPlanations}) adalah metode XAI yang didasarkan pada teori permainan kooperatif untuk menjelaskan prediksi individual \cite{molnar2025shap}.
 
-\subsection{Penggunaan Istilah yang Tidak Baku}
-Ada beberapa istilah yang sering digunakan dalam pembicaraan sehari-hari, tetapi tidak baku dalam penulisan ilmiah.
-Beberapa istilah tersebut antara lain:
-\begin{enumerate}
-  \item analisa $\rightarrow$ analisis
-  \item eksisting atau existing $\rightarrow$ yang ada atau saat ini
-  \item bisnis proses $\rightarrow$ proses bisnis
-  \item user $\rightarrow$ pengguna
-  \item system $\rightarrow$ sistem
-  \item database $\rightarrow$ basis data
-  \item aktifitas $\rightarrow$ aktivitas
-  \item efektifitas $\rightarrow$ efektivitas
-  \item sosial media $\rightarrow$ media sosial
-\end{enumerate}
+SHAP menghitung kontribusi setiap fitur terhadap prediksi menggunakan nilai Shapley seperti pada Persamaan \ref{eq:shap}.
 
-\subsection{Pemisah Desimal dan Ribuan}
-Tanda pemisah desimal dalam bahasa Indonesia adalah tanda koma, contoh:
-\begin{enumerate}
-  \item (Salah) Akurasi naik menjadi 50.6\% 
-  \item (Benar) Akurasi naik menjadi 50,6\% 
-\end{enumerate}
+\begin{equation}
+\phi_i = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|!(|N|-|S|-1)!}{|N|!} [f(S \cup \{i\}) - f(S)]
+\label{eq:shap}
+\end{equation}
 
-\subsection{Daftar atau \textit{List}}
-Ada beberapa aturan penulisan daftar atau \textit{list} yang perlu diperhatikan, antara lain:
-\begin{enumerate}[a)]
-\item Jika memungkinkan, hindari penggunaan “bullet points” atau sejenisnya. Sebaiknya, gunakan angka (1, 2, 3, ...) atau huruf (a, b, c, …). Dengan demikian, pembaca dapat dengan mudah melihat jumlah \textit{item} atau \textit{list}. 
-\item Jika dalam daftar hanya ada satu item, tidak perlu menggunakan nomor urut.
-\item Penjelasan atau deskripsi suatu item sebaiknya menyatu dengan judul item tersebut, tidak berbeda halaman. Contoh yang salah: judul item ada di halaman 10, namun deskripsinya di halaman 11. Sebaiknya pindahkan judul tersebut ke halaman 11.
-\item Jika penjelasan atau deskripsi suatu item cukup panjang, misalnya lebih dari 1 halaman atau terdiri atas beberapa paragraf, sebaiknya setiap item tersebut dijadikan judul subbab, kecuali jika level subbab sudah mencapai level 4. 
-\end{enumerate}
+Keterangan:
+\begin{itemize}
+\item $\phi_i$ adalah nilai SHAP untuk fitur $i$
+\item $N$ adalah himpunan semua fitur
+\item $S$ adalah subset fitur yang tidak mengandung $i$
+\item $f(S)$ adalah prediksi model menggunakan fitur dalam $S$
+\end{itemize}
 
-\subsection{Penggunaan Kata "masing-masing" dan "setiap"}
-Kata “masing-masing” digunakan di belakang kata yang diterangkan, misalnya 
-"Setiap proses menggunakan algoritma masing-masing". Kata “tiap-tiap” atau “setiap”
-ditempatkan di depan kata yang diterangkan, misalnya
-"Setiap proses menggunakan algoritma tertentu".
+Nilai SHAP positif menunjukkan fitur meningkatkan prediksi, sedangkan nilai negatif menunjukkan fitur menurunkan prediksi. Jumlah nilai SHAP semua fitur sama dengan selisih antara prediksi model dan nilai baseline \cite{awan2023introduction}.
+
+Dalam konteks prediksi kualitas udara, SHAP memungkinkan identifikasi faktor-faktor utama yang mendorong polusi. \textcite{radjabaycolle2025improving} menunjukkan bahwa integrasi SHAP dengan model prediksi kualitas udara Jakarta memungkinkan identifikasi faktor lingkungan dan antropogenik kunci, mendukung intervensi kebijakan berbasis bukti. \textcite{antonini2024machine} juga melaporkan bahwa SHAP efektif untuk interpretasi model \textit{machine learning} dalam tugas klasifikasi dan regresi kompleks.
+
+\section{Penelitian Terdahulu}
+
+Beberapa penelitian terdahulu telah mengembangkan model prediksi kualitas udara menggunakan berbagai pendekatan \textit{machine learning}. Ringkasan penelitian terdahulu yang relevan ditunjukkan pada Tabel \ref{tbl:related}.
+
+\begin{table}[h]
+  \begin{tabular}{ | p{2.5cm} | p{2cm} | p{2.5cm} | p{2cm} | p{3cm} |}
+  \hline
+  \textbf{Peneliti} & \textbf{Lokasi} & \textbf{Metode} & \textbf{Hasil} & \textbf{Keterbatasan} \\
+  \hline
+  Yenkikar dkk. (2025) & India & \textit{Hybrid} RF-ARIMA & R² = 0,94 & Hanya 6 fitur mentah, tanpa \textit{feature engineering} \\
+  \hline
+  Naz dkk. (2024) & Belfast & LSTM + \textit{Feature Engineering} & 5--86\% \textit{improvement} & Tidak menggunakan model \textit{hybrid} \\
+  \hline
+  Chen dkk. (2025) & Beijing & KSC-ConvLSTM & RMSE $\downarrow$ 4--8 & Memerlukan data spasial kompleks \\
+  \hline
+  Al Arsy dan Yasir (2025) & Jakarta & \textit{Random Forest} & R² = 0,61 & Hanya PM\textsubscript{2,5}, tanpa \textit{hybrid} \\
+  \hline
+  Radjabaycolle dkk. (2025) & Jakarta & LSTM + SHAP & -- & Tidak menggunakan \textit{hybrid} RF-ARIMA \\
+  \hline
+  \end{tabular}
+\caption{Ringkasan penelitian terdahulu}
+\label{tbl:related}
+\end{table}
+
+\textcite{yenkikar2025explainable} mengembangkan model \textit{hybrid} RF-ARIMA dengan SHAP untuk prediksi AQI di India yang mencapai R² = 0,94. Namun, penelitian tersebut secara eksplisit menyatakan keterbatasan bahwa model mengecualikan faktor eksternal dan hanya menggunakan 6 fitur polutan mentah tanpa mengeksplorasi \textit{feature engineering}.
+
+\textcite{naz2024two} menunjukkan pentingnya \textit{feature engineering} dengan pendekatan dua tahap yang menghasilkan 22 fitur dan meningkatkan performa model LSTM sebesar 5--86\%. \textcite{chen2025hybrid} mengembangkan model KSC-ConvLSTM untuk prediksi PM\textsubscript{2,5} di Beijing yang memanfaatkan data spasial dan temporal, namun memerlukan infrastruktur data yang kompleks.
+
+Untuk konteks Jakarta, \textcite{alarsy2025pm25} mengembangkan model \textit{Random Forest} untuk prediksi PM\textsubscript{2,5} yang mencapai R² = 0,61, sedangkan \textcite{radjabaycolle2025improving} menerapkan LSTM dengan SHAP untuk prediksi kualitas udara Jakarta. Kedua penelitian Jakarta tersebut belum mengeksplorasi pendekatan \textit{hybrid} RF-ARIMA dengan \textit{feature engineering} sistematis.
+
+\section{Kesenjangan Penelitian}
+
+Berdasarkan kajian literatur, teridentifikasi beberapa kesenjangan penelitian yang menjadi peluang pengembangan.
+
+Pertama, model \textit{hybrid} RF-ARIMA dari \textcite{yenkikar2025explainable} hanya menggunakan 6 fitur polutan mentah tanpa mengeksplorasi \textit{feature engineering}. Penelitian menunjukkan bahwa \textit{feature engineering} dapat meningkatkan performa prediksi secara signifikan \cite{naz2024two}, namun belum diterapkan pada arsitektur \textit{hybrid} RF-ARIMA.
+
+Kedua, penelitian prediksi kualitas udara Jakarta yang ada belum mengeksplorasi pendekatan \textit{hybrid} RF-ARIMA. \textcite{alarsy2025pm25} hanya menggunakan \textit{Random Forest} tunggal, sedangkan \textcite{radjabaycolle2025improving} menggunakan LSTM tanpa komponen ARIMA untuk residual.
+
+Ketiga, belum ada penelitian yang menerapkan model \textit{hybrid} RF-ARIMA dengan \textit{feature engineering} sistematis pada dataset Jakarta jangka panjang (lebih dari 10 tahun) untuk prediksi PM\textsubscript{10}.
+
+Penelitian ini mengisi kesenjangan tersebut dengan mengembangkan model \textit{hybrid} RF-ARIMA dari \textcite{yenkikar2025explainable} melalui penambahan 10 fitur hasil \textit{feature engineering}, penerapan pada konteks Jakarta dengan data 15 tahun, fokus pada PM\textsubscript{10} yang relevan dengan sumber polusi Jakarta, dan integrasi SHAP untuk mengidentifikasi faktor kunci polusi yang mendukung kebijakan berbasis bukti.

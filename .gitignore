@@ -1,0 +1,19 @@
+# LaTeX build files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.lof
+*.log
+*.lol
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.dvi
+*.fls
+*.fdb_latexmk
+
+# Mac system files
+.DS_Store

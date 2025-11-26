@@ -3,7 +3,103 @@
 % ==========================================
 \chapter{DESAIN KONSEP SOLUSI}
 \label{chap:desain-konsep-solusi}
-Ilustrasikan desain konsep solusi dalam bentuk model konseptual dan penjelasan secara ringkas, 
-beserta perbedaannya dengan sistem saat ini. Ilustrasi harus dapat dibandingkan (\textit{before} and \textit{after}). 
-Karena masih berupa proposal, bab ini hanya berisi gambar desain konsep solusi tersebut dan 
-penjelasan perbandingannya dengan gambar sistem yang ada saat ini (yang tergambar di awal Bab \ref{chap:analisis-masalah}).
+
+\section{Diagram Konseptual Sistem}
+
+Bagian ini menjelaskan perbandingan sistem prediksi kualitas udara Jakarta sebelum dan sesudah pengembangan model \textit{hybrid} Random Forest-ARIMA dengan \textit{feature engineering}.
+
+\subsection{Sistem Sebelum (\textit{Before})}
+
+Sistem pemantauan kualitas udara Jakarta saat ini memiliki alur seperti ditunjukkan pada Gambar \ref{gambar:before}. Data ISPU yang terdiri dari lima polutan mentah (PM\textsubscript{10}, SO\textsubscript{2}, CO, O\textsubscript{3}, NO\textsubscript{2}) dikumpulkan dari stasiun pemantauan, kemudian dilakukan monitoring harian dan perhitungan nilai ISPU, lalu dilaporkan ke masyarakat sebagai status kualitas udara harian.
+
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+      \includegraphics[width=0.5\textwidth]{image/gambar4.png}
+  \caption{Diagram sistem pemantauan kualitas udara Jakarta saat ini}
+  \label{gambar:before}
+\end{figure}
+
+Berdasarkan Gambar \ref{gambar:before}, sistem saat ini memiliki beberapa keterbatasan. Pertama, akurasi prediksi belum optimal karena tidak ada model \textit{machine learning} yang dioptimasi untuk prediksi PM\textsubscript{10}. Kedua, tidak ada \textit{feature engineering} sistematis karena hanya menggunakan lima polutan mentah tanpa mengeksplorasi pola temporal dan interaksi antar polutan. Ketiga, tidak ada \textit{explainability} untuk kebijakan karena sistem tidak memberikan informasi tentang faktor-faktor yang mendorong polusi.
+
+\subsection{Sistem Sesudah (\textit{After})}
+
+Sistem prediksi PM\textsubscript{10} Jakarta yang diusulkan memiliki alur seperti ditunjukkan pada Gambar \ref{gambar:after}. Sistem ini mengembangkan model \textit{hybrid} Random Forest-ARIMA dengan \textit{feature engineering} dan integrasi SHAP untuk \textit{explainability}.
+
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+      \includegraphics[width=0.5\textwidth]{image/gambar5.png}
+  \caption{Diagram sistem prediksi PM\textsubscript{10} Jakarta yang diusulkan}
+  \label{gambar:after}
+\end{figure}
+
+Berdasarkan Gambar \ref{gambar:after}, sistem yang diusulkan memiliki enam tahap utama. Pertama, data ISPU Jakarta periode 2010--2025 dikumpulkan sebagai input. Kedua, dilakukan \textit{preprocessing} dan \textit{feature engineering} untuk menghasilkan 15 fitur dari 5 polutan mentah. Ketiga, data dibagi menjadi 80\% untuk pelatihan dan 20\% untuk pengujian (\textit{train-test split}). Keempat, model \textit{hybrid} Random Forest dan ARIMA dilatih menggunakan data pelatihan. Kelima, dilakukan analisis SHAP untuk mengidentifikasi kontribusi setiap fitur terhadap prediksi. Keenam, model dievaluasi menggunakan metrik RMSE, MAE, dan R². Output akhir berupa prediksi PM\textsubscript{10} harian beserta kontribusi fitur yang dapat digunakan untuk mendukung kebijakan.
+
+\subsection{Perbandingan Sistem \textit{Before} dan \textit{After}}
+
+Perbandingan antara sistem sebelum dan sesudah pengembangan ditunjukkan pada Tabel \ref{tbl:perbandingan}.
+
+\begin{table}[h]
+  \begin{tabular}{ | p{3.5cm} | p{4.5cm} | p{5cm} |}
+  \hline
+  \textbf{Aspek} & \textbf{Sistem Sebelum} & \textbf{Sistem Sesudah} \\
+  \hline
+  Data input & 5 polutan mentah & 15 fitur (5 baseline + 10 \textit{engineered}) \\
+  \hline
+  Model & Tidak ada model ML khusus & \textit{Hybrid} Random Forest-ARIMA \\
+  \hline
+  Akurasi target & Belum optimal & Target R² $\geq$ 0,85 \\
+  \hline
+  \textit{Explainability} & Tidak ada & Analisis SHAP (\textit{global} dan \textit{local}) \\
+  \hline
+  Pola temporal & Tidak dieksploitasi & Fitur lag, \textit{rolling}, dan temporal \\
+  \hline
+  Dukungan kebijakan & Tidak ada & Identifikasi faktor kunci polusi \\
+  \hline
+  \end{tabular}
+\caption{Perbandingan sistem sebelum dan sesudah pengembangan}
+\label{tbl:perbandingan}
+\end{table}
+
+\section{Penjelasan Desain Solusi}
+
+Bagian ini menjelaskan desain setiap komponen sistem prediksi PM\textsubscript{10} Jakarta yang diusulkan secara ringkas dan relevan dengan masalah serta kebutuhan yang telah diidentifikasi pada Bab III.
+
+\subsection{Desain \textit{Data Preprocessing}}
+
+Tahap \textit{data preprocessing} bertujuan untuk menyiapkan data mentah agar dapat digunakan untuk pelatihan model. Desain \textit{preprocessing} mencakup dua proses utama.
+
+Pertama, penanganan data hilang (\textit{missing value handling}) menggunakan metode \textit{rolling mean} dengan \textit{window} 5 hari. Metode ini dipilih karena menjaga kontinuitas pola temporal dan tidak menimbulkan kebocoran data dari masa depan (\textit{data leakage}). Berdasarkan analisis data, terdapat sekitar 5--6\% data hilang yang perlu ditangani.
+
+Kedua, agregasi multi-stasiun dilakukan dengan menghitung rata-rata nilai polutan dari lima stasiun pemantauan (DKI1--DKI5) untuk setiap hari. Agregasi ini menghasilkan satu nilai representatif untuk Jakarta secara keseluruhan, menyederhanakan model tanpa kehilangan informasi penting.
+
+Desain ini menjawab kebutuhan F6 (memproses data historis 2010--2025) dan NF2 (\textit{robustness}).
+
+\subsection{Desain \textit{Feature Engineering}}
+
+Tahap \textit{feature engineering} bertujuan untuk mengekstraksi informasi tambahan dari data mentah yang dapat meningkatkan akurasi prediksi. Desain \textit{feature engineering} menghasilkan 10 fitur tambahan dari 5 fitur baseline.
+
+Fitur lag (pm10\_lag1, pm10\_lag2, pm10\_lag7) menangkap persistensi polusi dari hari-hari sebelumnya. Fitur \textit{rolling statistics} (pm10\_ma3, pm10\_ma7, pm10\_std7) menangkap tren jangka pendek dan volatilitas konsentrasi PM\textsubscript{10}. Fitur temporal (month, is\_weekend, season) menangkap pola musiman Jakarta, dengan musim kemarau (April--Oktober) cenderung memiliki polusi lebih tinggi dibandingkan musim hujan. Fitur interaksi (co\_times\_o3) menangkap aktivitas fotokimia yang berkontribusi pada pembentukan PM\textsubscript{10} sekunder.
+
+Desain ini menjawab kebutuhan F3 (memanfaatkan minimal 15 fitur) dan didasarkan pada temuan \textcite{naz2024two} bahwa \textit{feature engineering} dapat meningkatkan performa model hingga 86\%.
+
+\subsection{Desain Model \textit{Hybrid} Random Forest-ARIMA}
+
+Tahap pemodelan menggunakan arsitektur \textit{hybrid} yang menggabungkan \textit{Random Forest} dan ARIMA secara sekuensial. Desain model terdiri dari empat langkah.
+
+Pertama, data dibagi menjadi 80\% untuk pelatihan dan 20\% untuk pengujian menggunakan pembagian temporal (data terlama untuk pelatihan, data terbaru untuk pengujian). Kedua, \textit{Random Forest} dilatih menggunakan 15 fitur untuk memprediksi nilai PM\textsubscript{10}. Ketiga, residual (selisih antara nilai aktual dan prediksi \textit{Random Forest}) dihitung dan dimodelkan menggunakan ARIMA untuk menangkap pola temporal yang tidak tertangkap \textit{Random Forest}. Keempat, prediksi akhir dihitung sebagai penjumlahan prediksi \textit{Random Forest} dan prediksi residual ARIMA.
+
+\textit{Hyperparameter tuning} akan dilakukan menggunakan \textit{Grid Search} dengan \textit{cross-validation} untuk memaksimalkan performa model. Parameter yang akan di-\textit{tuning} meliputi jumlah pohon (\textit{n\_estimators}), kedalaman maksimum (\textit{max\_depth}), dan \textit{order} ARIMA (p, d, q).
+
+Desain ini menjawab kebutuhan F1 (prediksi PM\textsubscript{10} harian), F2 (model \textit{hybrid} RF-ARIMA), F4 (metrik performa), NF1 (akurasi 15\% lebih baik), dan NF2 (\textit{train-test split} 80:20).
+
+\subsection{Desain \textit{Explainability} dengan SHAP}
+
+Tahap \textit{explainability} menggunakan SHAP (\textit{SHapley Additive exPlanations}) untuk menjelaskan kontribusi setiap fitur terhadap prediksi model. Desain SHAP mencakup dua jenis interpretasi.
+
+Interpretasi \textit{global} mengidentifikasi fitur-fitur yang secara umum paling berpengaruh terhadap prediksi PM\textsubscript{10} Jakarta. Visualisasi yang dihasilkan berupa \textit{summary plot} yang menunjukkan \textit{ranking} kontribusi fitur. Interpretasi \textit{local} menjelaskan faktor-faktor yang mendorong prediksi spesifik pada hari tertentu. Visualisasi yang dihasilkan berupa \textit{force plot} yang menunjukkan kontribusi positif dan negatif setiap fitur.
+
+Informasi kontribusi fitur ini dapat digunakan oleh Dinas Lingkungan Hidup dan Dinas Kesehatan DKI Jakarta untuk mengidentifikasi sumber polusi utama dan merancang intervensi kebijakan yang tepat sasaran.
+
+Desain ini menjawab kebutuhan F5 (kontribusi fitur menggunakan SHAP) dan NF3 (interpretabilitas \textit{global} dan \textit{local}).

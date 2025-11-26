@@ -1,8 +1,8 @@
 # Proposal Tugas Akhir: Prediksi PM10 Jakarta dengan Hybrid RF-ARIMA
 
-**Penulis:** Muhammad Rafi Dhiyaulhaq (18222069)  
+**Penulis:** Muhammad Rafi Dhiyaulhaq, 18222069
 **Program:** Sistem dan Teknologi Informasi, ITB  
-**Pembimbing:** Dr. Fetty Fitriyanti Lubis, S.T., M.T.
+**Pembimbing:** Dr. Fetty Fitriyanti Lubis, S.T., M.T. (fettyfitriyanti@staff.stei.itb.ac.id)
 
 ## 📋 Deskripsi
 
@@ -27,4 +27,3 @@ Proposal tugas akhir untuk mengembangkan model prediksi PM10 Jakarta menggunakan
 ## 🙏 Acknowledgement
 
 Template LaTeX untuk proposal tugas akhir ini dikembangkan oleh Bapak Baskara (baskara@itb.ac.id) untuk mata kuliah II4091 Proposal Tugas Akhir, Program Studi Sistem dan Teknologi Informasi, ITB.
-

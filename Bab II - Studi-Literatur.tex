@@ -41,6 +41,16 @@ Dataset ISPU Jakarta yang digunakan dalam penelitian ini mencakup periode 2010--
 
 Di Jakarta, PM\textsubscript{10} merupakan polutan dominan yang berasal dari kombinasi lalu lintas padat dengan lebih dari 20 juta kendaraan bermotor, aktivitas konstruksi yang intensif, dan debu jalan akibat kondisi infrastruktur yang bervariasi \cite{firdaus2023jakarta}. Kondisi ini menjadikan prediksi PM\textsubscript{10} sangat relevan untuk sistem peringatan dini kualitas udara Jakarta.
 
+Selain pertimbangan karakteristik dan dampak kesehatan, pemilihan PM\textsubscript{10} sebagai fokus prediksi juga didasarkan pada ketersediaan data. Seperti ditunjukkan pada Gambar \ref{gambar:missing-pm25}, kolom PM\textsubscript{2,5} memiliki persentase \textit{missing values} yang sangat tinggi mencapai 73\% (hanya 1.516 data valid dari total dataset), sedangkan PM\textsubscript{10} memiliki kelengkapan data yang jauh lebih baik (94\% valid). Keterbatasan data ini menjadikan pemodelan PM\textsubscript{2,5} tidak memungkinkan untuk dilakukan secara akurat menggunakan metode \textit{data-driven} pada rentang waktu 2010--2025, sehingga penelitian ini memfokuskan prediksi pada PM\textsubscript{10} yang memiliki kontinuitas data yang memadai untuk analisis deret waktu jangka panjang.
+
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+      \includegraphics[width=0.9\textwidth]{image/gambar7.png}
+  \caption{Statistik dataset ISPU Jakarta menunjukkan persentase \textit{missing values} untuk kolom pm25 mencapai 73\%}
+  \label{gambar:missing-pm25}
+\end{figure}
+
 \section{Indeks Standar Pencemar Udara (ISPU)}
 
 Indeks Standar Pencemar Udara (ISPU) adalah angka tanpa satuan yang menggambarkan kondisi mutu udara ambien di lokasi dan waktu tertentu berdasarkan dampak terhadap kesehatan manusia, nilai estetika, dan makhluk hidup lainnya \cite{permenlhk2020ispu}. ISPU diatur dalam Peraturan Menteri Lingkungan Hidup dan Kehutanan Nomor P.14/MENLHK/\allowbreak SETJEN/\allowbreak KUM.1/\allowbreak 7/\allowbreak 2020 yang mendefinisikan tujuh parameter polutan: PM\textsubscript{10}, PM\textsubscript{2,5}, SO\textsubscript{2}, CO, O\textsubscript{3}, NO\textsubscript{2}, dan HC.
@@ -118,15 +128,17 @@ Sebelum menerapkan ARIMA, data harus diuji stasioneritas menggunakan uji \textit
 
 Model \textit{hybrid} menggabungkan \textit{Random Forest} dan ARIMA untuk memanfaatkan kelebihan kedua pendekatan. \textit{Random Forest} efektif menangkap hubungan non-linier antar fitur, sedangkan ARIMA efektif memodelkan pola temporal pada residual \cite{yenkikar2025explainable}. Arsitektur model \textit{hybrid} ditunjukkan pada Gambar \ref{gambar:hybrid}.
 
+Proses prediksi \textit{hybrid} terdiri dari empat tahap. Pertama, \textit{Random Forest} dilatih menggunakan fitur polutan dan fitur hasil \textit{engineering} untuk memprediksi nilai PM\textsubscript{10}. Kedua, residual dihitung sebagai selisih antara nilai aktual dan prediksi \textit{Random Forest}. Ketiga, model ARIMA diterapkan pada residual untuk menangkap pola temporal yang tidak tertangkap \textit{Random Forest}. Keempat, prediksi akhir dihitung sebagai penjumlahan prediksi \textit{Random Forest} dan prediksi residual ARIMA seperti pada Persamaan \ref{eq:hybrid}.
+
 \begin{figure}[h]
   \centering
   \captionsetup{justification=centering}
-      \includegraphics[width=0.55\textwidth]{image/gambar2.png}
+      \includegraphics[width=0.5\textwidth]{image/gambar2.png}
   \caption{Arsitektur model \textit{hybrid Random Forest}-ARIMA \cite{yenkikar2025explainable}}
   \label{gambar:hybrid}
 \end{figure}
 
-Proses prediksi \textit{hybrid} terdiri dari empat tahap. Pertama, \textit{Random Forest} dilatih menggunakan fitur polutan dan fitur hasil \textit{engineering} untuk memprediksi nilai PM\textsubscript{10}. Kedua, residual dihitung sebagai selisih antara nilai aktual dan prediksi \textit{Random Forest}. Ketiga, model ARIMA diterapkan pada residual untuk menangkap pola temporal yang tidak tertangkap \textit{Random Forest}. Keempat, prediksi akhir dihitung sebagai penjumlahan prediksi \textit{Random Forest} dan prediksi residual ARIMA seperti pada Persamaan \ref{eq:hybrid}.
+\textcite{yenkikar2025explainable} melaporkan bahwa model \textit{hybrid} RF-ARIMA mencapai R² = 0,94 untuk prediksi AQI di India, menunjukkan efektivitas pendekatan ini dalam prediksi kualitas udara.
 
 \begin{equation}
 \hat{y}_{hybrid} = \hat{y}_{RF} + \hat{r}_{ARIMA}
@@ -139,8 +151,6 @@ Keterangan:
 \item $\hat{y}_{RF}$ adalah prediksi dari \textit{Random Forest}
 \item $\hat{r}_{ARIMA}$ adalah prediksi residual dari ARIMA
 \end{itemize}
-
-\textcite{yenkikar2025explainable} melaporkan bahwa model \textit{hybrid} RF-ARIMA mencapai R² = 0,94 untuk prediksi AQI di India, menunjukkan efektivitas pendekatan ini dalam prediksi kualitas udara.
 
 \section{\textit{Feature Engineering} untuk \textit{Time Series}}
 
@@ -243,4 +253,4 @@ Kedua, penelitian prediksi kualitas udara Jakarta yang ada belum mengeksplorasi 
 
 Ketiga, belum ada penelitian yang menerapkan model \textit{hybrid} RF-ARIMA dengan \textit{feature engineering} sistematis pada dataset Jakarta jangka panjang (lebih dari 10 tahun) untuk prediksi PM\textsubscript{10}.
 
-Penelitian ini mengisi kesenjangan tersebut dengan mengembangkan model \textit{hybrid} RF-ARIMA dari \textcite{yenkikar2025explainable} melalui penambahan 10 fitur hasil \textit{feature engineering}, penerapan pada konteks Jakarta dengan data 15 tahun, fokus pada PM\textsubscript{10} yang relevan dengan sumber polusi Jakarta, dan integrasi SHAP untuk mengidentifikasi faktor kunci polusi yang mendukung kebijakan berbasis bukti.
+Penelitian ini mengisi kesenjangan tersebut dengan mengembangkan model \textit{hybrid} RF-ARIMA dari \textcite{yenkikar2025explainable} melalui penambahan 10 fitur hasil \textit{feature engineering}, penerapan pada konteks Jakarta dengan data 15 tahun, fokus pada PM\textsubscript{10} yang relevan dengan sumber polusi Jakarta, dan integrasi SHAP.

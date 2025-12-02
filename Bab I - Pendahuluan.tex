@@ -63,14 +63,6 @@ Pada bagian ini, dituliskan batasan-batasan masalah yang digunakan secara rinci 
 % --- Metodologi Pengerjaan TA ---
 \section{Metodologi}
 
-\begin{figure}[h]
-  \centering
-  \captionsetup{justification=centering}
-      \includegraphics[width=0.25\textwidth]{image/gambar1.png}
-  \caption{Metodologi \textit{Design Science Research Methodology} (DSRM) \cite{haryanti2022dsrm}}
-  \label{gambar:dsrm}
-\end{figure}
-
 Metodologi yang digunakan dalam pelaksanaan penelitian tugas akhir ini adalah \textit{Design Science Research Methodology} (DSRM) seperti pada Gambar \ref{gambar:dsrm}. DSRM merupakan kerangka kerja terstruktur untuk mengembangkan dan mengevaluasi artefak berbasis teknologi informasi \cite{haryanti2022dsrm}. Penelitian ini mengembangkan model \textit{hybrid} Random Forest-ARIMA dari \textcite{yenkikar2025explainable} dengan tiga pengembangan utama:
 
 \begin{enumerate}
@@ -82,6 +74,16 @@ Metodologi yang digunakan dalam pelaksanaan penelitian tugas akhir ini adalah \t
 \item Fokus pada PM\textsubscript{10} karena merupakan polutan dominan di Jakarta yang berasal dari sumber mekanis seperti debu jalan, konstruksi, dan keausan kendaraan \cite{firdaus2023jakarta}, memiliki dampak signifikan pada sistem respirasi dan kardiovaskular \cite{zhang2021association,kyung2020particulate}, serta merupakan salah satu parameter utama dalam regulasi ISPU Indonesia \cite{permenlhk2020ispu}
 
 \end{enumerate}
+
+\bigskip
+
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+      \includegraphics[width=1\textwidth]{image/gambar1.png}
+  \caption{Metodologi \textit{Design Science Research Methodology} (DSRM) \cite{haryanti2022dsrm}}
+  \label{gambar:dsrm}
+\end{figure}
 
 Terdapat lima tahap utama dalam prosesnya yang diadaptasi untuk penelitian ini.
 
@@ -95,7 +97,7 @@ Pada tahap ini, dilakukan kajian literatur untuk mengidentifikasi permasalahan t
 
 Tahap ini bertujuan untuk mengidentifikasi kesenjangan penelitian dari literatur yang telah dikaji. \textcite{yenkikar2025explainable} secara eksplisit menyatakan keterbatasan bahwa model mengecualikan faktor eksternal dan hanya menggunakan 6 fitur polutan mentah tanpa mengeksplorasi pola temporal, fitur statistik, dan interaksi antar polutan. Kesenjangan ini menjadi peluang untuk mengembangkan model dengan pendekatan \textit{feature engineering} sistematis yang dapat meningkatkan akurasi prediksi.
 
-\item \textit{Purposed DSRM Approach for Developing Artifact}
+\item \textit{Proposed DSRM Approach for Developing Artifact}
 
 Pada tahap ini, diusulkan pendekatan pengembangan artefak berupa model prediksi PM\textsubscript{10} Jakarta yang meningkatkan model baseline \cite{yenkikar2025explainable}. Pengembangan yang dilakukan meliputi ekspansi fitur dari 5 fitur baseline menjadi 15 fitur melalui \textit{feature engineering}, integrasi analisis SHAP untuk \textit{explainability} dan identifikasi faktor kunci polusi Jakarta, serta penerapan pada konteks geografis Jakarta dengan data 15 tahun untuk meningkatkan kepraktisan dan skalabilitas model.
 

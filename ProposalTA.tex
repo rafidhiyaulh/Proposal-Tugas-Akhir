@@ -6,7 +6,7 @@
 % Institut Teknologi Bandung
 % 
 % Dibuat oleh: IGB Baskara Nugraha 
-% Email: baskara@itb.ac.id 
+% Email: [baskara@itb.ac.id](mailto:baskara@itb.ac.id) 
 % 
 % Last updated: 20 Oktober 2025
 %
@@ -61,9 +61,9 @@
 %       }
 %   ]
 % - Untuk referensi lebih lanjut tentang penggunaan BibLaTeX dengan gaya Chicago, silakan merujuk ke dokumentasi resmi BibLaTeX.
-%   https://ctan.org/pkg/biblatex-chicago
+%   [https://ctan.org/pkg/biblatex-chicago](https://ctan.org/pkg/biblatex-chicago)
 % - Untuk referensi lebih lanjut tentang penggunaan XeLaTeX dan fontspec, silakan merujuk ke dokumentasi resmi fontspec.
-%   https://ctan.org/pkg/fontspec
+%   [https://ctan.org/pkg/fontspec](https://ctan.org/pkg/fontspec)
 % - Selamat menyusun proposal tugas akhir Anda!
 %
 \documentclass[12pt,a4paper,oneside]{book}
@@ -98,10 +98,8 @@
 \usepackage{booktabs}
 \usepackage[bahasai]{datetime2}
 
-
 \setcounter{tocdepth}{4} % kedalaman daftar isi sampai subsubbab
 \setcounter{secnumdepth}{4} % kedalaman penomoran sampai subsubbab
-
 
 % ==========================================
 % SITASI DAN DAFTAR PUSTAKA (MENGGUNAKAN CHICAGO MANUAL OF STYLE)
@@ -163,11 +161,10 @@
 
 % --- Ubah nama daftar listing ke "DAFTAR KODE" ---
 % --- Harus diletakkan sebelum \begin{document} ---
-\renewcommand{\lstlistlistingname}{\centering\normalsize DAFTAR KODE} 
-\renewcommand{\lstlistingname}{Kode}
-\lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+% \renewcommand{\lstlistlistingname}{\centering\normalsize DAFTAR KODE} 
+% \renewcommand{\lstlistingname}{Kode}
+% \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
 %\captionsetup[lstlisting]{justification=raggedright,singlelinecheck=false}
-
 
 \renewcommand \cftchapdotsep{4.5}
 %\cftsetrmarg{4em}  % Ini diset agar judul subbab tidak mepet ke nomor halaman di daftar isi
@@ -284,9 +281,9 @@
 % ==========================================
 % Versi 1 pembimbing (default)
 % ==========================================
-	Pembimbing  \\[3cm]
-	Dr. Fetty Fitriyanti Lubis, S.T., M.T.   \\[0.2cm]
-	NIP. 118110071 
+  Pembimbing  \\[3cm]
+  Dr. Fetty Fitriyanti Lubis, S.T., M.T.   \\[0.2cm]
+  NIP. 118110071 
 % ==========================================
 
 \end{center}
@@ -334,12 +331,6 @@
 \listoftables
 \addcontentsline{toc}{chapter}{DAFTAR TABEL}
 
-% --- DAFTAR LISTING (ALGORITMA, PSEUDOCODE, SOURCE CODE) ---
-\newpage
-
-\lstlistoflistings
-\addcontentsline{toc}{chapter}{\lstlistlistingname}
-
 \mainmatter
 % --- FORMAT TAMPILAN JUDUL BAB, SUBBAB, JUDUL GAMBAR DAN TABEL ---
 % --- Judul Bab ---
@@ -349,22 +340,21 @@
 \renewcommand\thechapter{\Roman{chapter}}
 % --- Judul Subbab dan Subsubbab ---
 \titleformat{\section}
-	{\normalfont\bfseries}
-	{\thesection}{1em}{}
+  {\normalfont\bfseries}
+  {\thesection}{1em}{}
 \titleformat{\subsection}
-	{\normalfont\bfseries}
-	{\thesubsection}{1em}{}
+  {\normalfont\bfseries}
+  {\thesubsection}{1em}{}
 \titleformat{\subsubsection}
-	{\normalfont\bfseries}
-	{\thesubsubsection}{1em}{}
+  {\normalfont\bfseries}
+  {\thesubsubsection}{1em}{}
 
 
 % --- Format judul gambar dan tabel ---
 \captionsetup[figure]{labelsep=space}
 \captionsetup[table]{labelsep=space}
 \floatsetup[table]{capposition=top}
-\captionsetup[lstlisting]{labelsep=space}
-\floatsetup[lstlisting]{capposition=top}
+
 
 % --- Atur indentasi paragraf ---
 \setlength{\parindent}{0pt}
@@ -394,4 +384,3 @@
 % \input{Lampiran-B.tex}
 
 \end{document}
- 

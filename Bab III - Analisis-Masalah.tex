@@ -15,6 +15,8 @@ Sistem pemantauan kualitas udara Jakarta saat ini dikelola oleh Dinas Lingkungan
 
 Berdasarkan Gambar \ref{gambar:kondisi}, sistem saat ini memiliki alur sebagai berikut: data ISPU Jakarta yang mencakup PM\textsubscript{10} dan polutan lain dari periode 2010--2025 dikumpulkan dari lima stasiun pemantauan, kemudian dilakukan monitoring harian dan pelaporan ke masyarakat melalui website dan aplikasi KLHK, dan menghasilkan status kualitas udara harian dengan model prediksi sederhana.
 
+\vspace{1cm}
+
 Meskipun sudah terdapat beberapa penelitian prediksi kualitas udara Jakarta, sistem yang ada masih memiliki keterbatasan. Pertama, akurasi prediksi belum optimal karena penelitian sebelumnya seperti \textcite{alarsy2025pm25} hanya mencapai R² = 0,61 untuk prediksi PM\textsubscript{2,5} Jakarta menggunakan \textit{Random Forest} tunggal. Kedua, tidak ada \textit{feature engineering} sistematis karena model yang ada hanya menggunakan fitur polutan mentah tanpa mengeksplorasi pola temporal, statistik, dan interaksi antar polutan \cite{yenkikar2025explainable}. Ketiga, tidak ada \textit{explainability} untuk kebijakan karena model prediksi yang ada belum mengintegrasikan analisis SHAP untuk mengidentifikasi faktor-faktor kunci yang mendorong polusi dan mendukung pengambilan keputusan berbasis bukti.
 
 \section{Analisis Kebutuhan}

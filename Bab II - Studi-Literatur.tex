@@ -57,22 +57,24 @@ Indeks Standar Pencemar Udara (ISPU) adalah angka tanpa satuan yang menggambarka
 
 ISPU berfungsi sebagai bahan informasi kepada masyarakat tentang kualitas udara di lokasi dan waktu tertentu, bahan pertimbangan pemerintah dalam melakukan upaya pengendalian pencemaran udara, dan sebagai sistem peringatan dini (\textit{early warning system}) bagi masyarakat \cite{chaniago2020ispu}. Kategori ISPU dan dampaknya terhadap kesehatan ditunjukkan pada Tabel \ref{tbl:ispu}.
 
-\begin{table}[h]
-  \begin{tabular}{ | c | l | p{7cm} |}
-  \hline
-  \textbf{Rentang} & \textbf{Kategori} & \textbf{Dampak Kesehatan} \\
-  \hline
-  0--50 & Baik & Tidak memberikan efek bagi kesehatan \\
-  \hline
-  51--100 & Sedang & Tidak berpengaruh pada kesehatan manusia atau hewan, namun berpengaruh pada tumbuhan sensitif \\
-  \hline
-  101--200 & Tidak Sehat & Merugikan manusia atau kelompok yang sensitif \\
-  \hline
-  201--300 & Sangat Tidak Sehat & Dapat merugikan kesehatan pada sejumlah segmen populasi yang terpapar \\
-  \hline
-  $>$300 & Berbahaya & Dapat menimbulkan efek kesehatan serius pada seluruh populasi \\
-  \hline
-  \end{tabular}
+\vspace{1cm}
+
+\begin{table}[t]
+\begin{tabular}{ | c | l | p{7cm} |}
+\hline
+\textbf{Rentang} & \textbf{Kategori} & \textbf{Dampak Kesehatan} \\
+\hline
+0--50 & Baik & Tidak memberikan efek bagi kesehatan \\
+\hline
+51--100 & Sedang & Tidak berpengaruh pada kesehatan manusia atau hewan, namun berpengaruh pada tumbuhan sensitif \\
+\hline
+101--200 & Tidak Sehat & Merugikan manusia atau kelompok yang sensitif \\
+\hline
+201--300 & Sangat Tidak Sehat & Dapat merugikan kesehatan pada sejumlah segmen populasi yang terpapar \\
+\hline
+$>$300 & Berbahaya & Dapat menimbulkan efek kesehatan serius pada seluruh populasi \\
+\hline
+\end{tabular}
 \caption{Kategori ISPU dan dampak kesehatan \cite{septiani2024combating}}
 \label{tbl:ispu}
 \end{table}
@@ -83,7 +85,7 @@ Pendekatan \textit{machine learning} telah banyak diterapkan untuk prediksi kual
 
 \subsection{\textit{Random Forest}}
 
-\textit{Random Forest} adalah algoritma \textit{ensemble learning} yang mengkombinasikan prediksi dari banyak pohon keputusan (\textit{decision trees}) untuk menghasilkan prediksi yang lebih akurat dan robust \cite{alarsy2025pm25}. Setiap pohon dalam \textit{Random Forest} dilatih menggunakan subset acak dari data pelatihan (\textit{bootstrap sampling}) dan subset acak dari fitur pada setiap \textit{split node}.
+\textit{Random Forest} adalah algoritma \textit{ensemble learning} yang mengkombinasikan prediksi dari banyak pohon keputusan (\textit{decision trees}) untuk menghasilkan prediksi yang lebih akurat dan \textit{robust} \cite{alarsy2025pm25}. Setiap pohon dalam \textit{Random Forest} dilatih menggunakan subset acak dari data pelatihan (\textit{bootstrap sampling}) dan subset acak dari fitur pada setiap \textit{split node}.
 
 Untuk tugas regresi, prediksi \textit{Random Forest} dihitung sebagai rata-rata prediksi dari semua pohon dalam ensemble seperti pada Persamaan \ref{eq:rf}.
 
@@ -99,7 +101,9 @@ Keterangan:
 \item $T_b(x)$ adalah prediksi dari pohon ke-$b$ untuk input $x$
 \end{itemize}
 
-Keunggulan \textit{Random Forest} untuk prediksi kualitas udara meliputi kemampuan menangani hubungan non-linier antar variabel, robust terhadap \textit{outlier} dan \textit{noise}, dapat menangani data dengan banyak fitur tanpa memerlukan seleksi fitur eksplisit, serta memberikan estimasi \textit{feature importance} yang berguna untuk interpretasi \cite{abdallah2025predicting}.
+\vspace{1cm}
+
+Keunggulan \textit{Random Forest} untuk prediksi kualitas udara meliputi kemampuan menangani hubungan non-linier antar variabel, \textit{robust} terhadap \textit{outlier} dan \textit{noise}, dapat menangani data dengan banyak fitur tanpa memerlukan seleksi fitur eksplisit, serta memberikan estimasi \textit{feature importance} yang berguna untuk interpretasi \cite{abdallah2025predicting}.
 
 \subsection{ARIMA (\textit{AutoRegressive Integrated Moving Average})}
 
@@ -128,7 +132,7 @@ Sebelum menerapkan ARIMA, data harus diuji stasioneritas menggunakan uji \textit
 
 Model \textit{hybrid} menggabungkan \textit{Random Forest} dan ARIMA untuk memanfaatkan kelebihan kedua pendekatan. \textit{Random Forest} efektif menangkap hubungan non-linier antar fitur, sedangkan ARIMA efektif memodelkan pola temporal pada residual \cite{yenkikar2025explainable}. Arsitektur model \textit{hybrid} ditunjukkan pada Gambar \ref{gambar:hybrid}.
 
-Proses prediksi \textit{hybrid} terdiri dari empat tahap. Pertama, \textit{Random Forest} dilatih menggunakan fitur polutan dan fitur hasil \textit{engineering} untuk memprediksi nilai PM\textsubscript{10}. Kedua, residual dihitung sebagai selisih antara nilai aktual dan prediksi \textit{Random Forest}. Ketiga, model ARIMA diterapkan pada residual untuk menangkap pola temporal yang tidak tertangkap \textit{Random Forest}. Keempat, prediksi akhir dihitung sebagai penjumlahan prediksi \textit{Random Forest} dan prediksi residual ARIMA seperti pada Persamaan \ref{eq:hybrid}.
+\vspace{2cm}
 
 \begin{figure}[h]
   \centering
@@ -139,6 +143,8 @@ Proses prediksi \textit{hybrid} terdiri dari empat tahap. Pertama, \textit{Rando
 \end{figure}
 
 \textcite{yenkikar2025explainable} melaporkan bahwa model \textit{hybrid} RF-ARIMA mencapai R² = 0,94 untuk prediksi AQI di India, menunjukkan efektivitas pendekatan ini dalam prediksi kualitas udara.
+
+Proses prediksi \textit{hybrid} terdiri dari empat tahap. Pertama, \textit{Random Forest} dilatih menggunakan fitur polutan dan fitur hasil \textit{engineering} untuk memprediksi nilai PM\textsubscript{10}. Kedua, residual dihitung sebagai selisih antara nilai aktual dan prediksi \textit{Random Forest}. Ketiga, model ARIMA diterapkan pada residual untuk menangkap pola temporal yang tidak tertangkap \textit{Random Forest}. Keempat, prediksi akhir dihitung sebagai penjumlahan prediksi \textit{Random Forest} dan prediksi residual ARIMA seperti pada Persamaan \ref{eq:hybrid}.
 
 \begin{equation}
 \hat{y}_{hybrid} = \hat{y}_{RF} + \hat{r}_{ARIMA}
@@ -215,27 +221,7 @@ Dalam konteks prediksi kualitas udara, SHAP memungkinkan identifikasi faktor-fak
 
 \section{Penelitian Terdahulu}
 
-Beberapa penelitian terdahulu telah mengembangkan model prediksi kualitas udara menggunakan berbagai pendekatan \textit{machine learning}. Ringkasan penelitian terdahulu yang relevan ditunjukkan pada Tabel \ref{tbl:related}.
-
-\begin{table}[h]
-  \begin{tabular}{ | p{2.5cm} | p{2cm} | p{2.5cm} | p{2cm} | p{3cm} |}
-  \hline
-  \textbf{Peneliti} & \textbf{Lokasi} & \textbf{Metode} & \textbf{Hasil} & \textbf{Keterbatasan} \\
-  \hline
-  Yenkikar dkk. (2025) & India & \textit{Hybrid} RF-ARIMA & R² = 0,94 & Hanya 6 fitur mentah, tanpa \textit{feature engineering} \\
-  \hline
-  Naz dkk. (2024) & Belfast & LSTM + \textit{Feature Engineering} & 5--86\% \textit{improvement} & Tidak menggunakan model \textit{hybrid} \\
-  \hline
-  Chen dkk. (2025) & Beijing & KSC-ConvLSTM & RMSE $\downarrow$ 4--8 & Memerlukan data spasial kompleks \\
-  \hline
-  Al Arsy dan Yasir (2025) & Jakarta & \textit{Random Forest} & R² = 0,61 & Hanya PM\textsubscript{2,5}, tanpa \textit{hybrid} \\
-  \hline
-  Radjabaycolle dkk. (2025) & Jakarta & LSTM + SHAP & -- & Tidak menggunakan \textit{hybrid} RF-ARIMA \\
-  \hline
-  \end{tabular}
-\caption{Ringkasan penelitian terdahulu}
-\label{tbl:related}
-\end{table}
+Beberapa penelitian terdahulu telah mengembangkan model prediksi kualitas udara menggunakan berbagai pendekatan \textit{machine learning}.
 
 \textcite{yenkikar2025explainable} mengembangkan model \textit{hybrid} RF-ARIMA dengan SHAP untuk prediksi AQI di India yang mencapai R² = 0,94. Namun, penelitian tersebut secara eksplisit menyatakan keterbatasan bahwa model mengecualikan faktor eksternal dan hanya menggunakan 6 fitur polutan mentah tanpa mengeksplorasi \textit{feature engineering}.
 
@@ -253,4 +239,4 @@ Kedua, penelitian prediksi kualitas udara Jakarta yang ada belum mengeksplorasi 
 
 Ketiga, belum ada penelitian yang menerapkan model \textit{hybrid} RF-ARIMA dengan \textit{feature engineering} sistematis pada dataset Jakarta jangka panjang (lebih dari 10 tahun) untuk prediksi PM\textsubscript{10}.
 
-Penelitian ini mengisi kesenjangan tersebut dengan mengembangkan model \textit{hybrid} RF-ARIMA dari \textcite{yenkikar2025explainable} melalui penambahan 10 fitur hasil \textit{feature engineering}, penerapan pada konteks Jakarta dengan data 15 tahun, fokus pada PM\textsubscript{10} yang relevan dengan sumber polusi Jakarta, dan integrasi SHAP.
+Penelitian ini mengisi kesenjangan tersebut dengan mengembangkan model \textit{hybrid} RF-ARIMA dari \textcite{yenkikar2025explainable} melalui penambahan 10 fitur hasil \textit{feature engineering}, penerapan pada konteks Jakarta dengan data 15 tahun, fokus pada PM\textsubscript{10} yang relevan dengan sumber polusi Jakarta, dan integrasi SHAP untuk mengidentifikasi faktor kunci polusi yang mendukung kebijakan berbasis bukti.

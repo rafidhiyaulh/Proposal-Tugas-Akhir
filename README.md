@@ -19,6 +19,16 @@ Proposal tugas akhir untuk mengembangkan model prediksi PM10 Jakarta menggunakan
 - `daftar-pustaka.bib` - 28 referensi (2019-2025)
 - `image/` - Gambar & diagram
 
+## 📊 Diagram & Visualisasi
+
+Diagram-diagram pendukung proposal tersedia di [draw.io](https://draw.google.com):
+
+- [Lihat Diagram Lengkap](https://drive.google.com/file/d/1nLYmyIUW5TiM1KjfRZlrCmi8uCqgQLB9/view?usp=sharing) (Google Drive - draw.io)
+
+## 🎤 Presentasi
+
+Link presentasi: *(Menyusul)*
+
 ## 📚 Referensi
 
 28 sumber dari Google Scholar, IEEE Xplore, PubMed (2019-2025)

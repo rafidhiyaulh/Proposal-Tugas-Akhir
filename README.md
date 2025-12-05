@@ -27,7 +27,8 @@ Diagram-diagram pendukung proposal tersedia di [draw.io](https://draw.google.com
 
 ## 🎤 Presentasi
 
-- [Lihat PPT yang digunakan untuk Presentasi](https://drive.google.com/file/d/1uFB2x-Jg8VamOdo0kbAdemCAjwUgOORq/view?usp=sharing) (Google Drive - PDF)
+- [Lihat PPT (PDF) yang digunakan untuk Presentasi](https://drive.google.com/file/d/1uFB2x-Jg8VamOdo0kbAdemCAjwUgOORq/view?usp=sharing) (Google Drive - PDF)
+- [Lihat PPT (canva) yang digunakan untuk Presentasi](https://www.canva.com/design/DAG6V6VEHpA/JB_lEV8rQ6y30yIf0mGqaw/edit?utm_content=DAG6V6VEHpA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) (Canva)
 
 ## 📚 Referensi
 

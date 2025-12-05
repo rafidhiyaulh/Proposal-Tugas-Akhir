@@ -27,7 +27,7 @@ Diagram-diagram pendukung proposal tersedia di [draw.io](https://draw.google.com
 
 ## 🎤 Presentasi
 
-Link presentasi: *(Menyusul)*
+Link presentasi: (https://drive.google.com/file/d/1uFB2x-Jg8VamOdo0kbAdemCAjwUgOORq/view?usp=sharing)
 
 ## 📚 Referensi
 
